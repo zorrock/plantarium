@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+
+		
+
+		<link rel="modulepreload" href="/_app/start-c5b8d5a7.js">
+		<link rel="modulepreload" href="/_app/chunks/vendor-3855640a.js">
+		<link rel="modulepreload" href="/_app/chunks/preload-helper-ec9aa979.js">
+		<link rel="modulepreload" href="/_app/chunks/paths-28a87002.js">
+		<link rel="modulepreload" href="/_app/pages/__layout.svelte-2cc41d4d.js">
+		<link rel="modulepreload" href="/_app/chunks/Section.svelte_svelte&type=style&lang-134c550c.js">
+		<link rel="modulepreload" href="/_app/chunks/index-0f412a51.js">
+		<link rel="modulepreload" href="/_app/pages/logout.svelte-a3134e28.js">
+		<link rel="stylesheet" href="/_app/assets/start-808c0b29.css">
+		<link rel="stylesheet" href="/_app/assets/vendor-be251421.css">
+		<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-80ed9695.css">
+		<link rel="stylesheet" href="/_app/assets/Section.svelte_svelte&type=style&lang-f2bd81f9.css">
+
+		<script type="module">
+			import { start } from "/_app/start-c5b8d5a7.js";
+			start({
+				target: document.querySelector("#svelte"),
+				paths: {"base":"","assets":""},
+				session: {},
+				host: location.host,
+				route: true,
+				spa: false,
+				trailing_slash: "never",
+				hydrate: {
+					status: 200,
+					error: null,
+					nodes: [
+						import("/_app/pages/__layout.svelte-2cc41d4d.js"),
+						import("/_app/pages/logout.svelte-a3134e28.js")
+					],
+					page: {
+						host: location.host, // TODO this is redundant
+						path: "\u002Flogout",
+						query: new URLSearchParams(""),
+						params: {}
+					}
+				}
+			});
+		</script>
+  </head>
+
+  <body class="bg-gray-100">
+    <div id="svelte">
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container mx-auto"><div class="text-center my-6"><nav class="rounded bg-white shadow-xl w-auto inline-block p-2 mx-auto object-center"><a class="p-3 rounded" href="/">Home
+        </a><a class="p-3 rounded" href="/reports">Reports
+        </a><a class="p-3 rounded" href="/login">Login
+        </a></nav></div>
+  <button>logout</button>
+</div>
+
+
+
+			
+		</div>
+  </body>
+</html>

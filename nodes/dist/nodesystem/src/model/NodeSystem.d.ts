@@ -38,8 +38,8 @@ export default class NodeSystem extends EventEmitter {
     serialize(): {
         history: {
             steps: {
-                previous: unknown;
-                next: unknown;
+                previous: Partial<NodeProps>;
+                next: Partial<NodeProps>;
             }[];
             index: number;
         };

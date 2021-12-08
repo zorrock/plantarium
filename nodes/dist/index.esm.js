@@ -9718,8 +9718,7 @@ var NodeHistory = class {
         if (int) {
           clearTimeout(int);
         } else {
-          this.prevState = this.system.serialize();
-          delete this.prevState.history;
+          this.prevState = this.system.serialize().nodes;
         }
         int = setTimeout(() => {
           this._addAction();
@@ -9736,8 +9735,7 @@ var NodeHistory = class {
     if (this.historyIndex !== this.history.length - 1) {
       this.history.length = this.historyIndex + 1;
     }
-    const newState = this.system.serialize();
-    delete newState.history;
+    const newState = this.system.serialize().nodes;
     const [next, previous] = diffBoth(this.prevState, newState);
     if (!previous || !next)
       return;
@@ -9757,15 +9755,8 @@ var NodeHistory = class {
     };
   }
   deserialize(data) {
-    var _a;
     this.historyIndex = data.index;
-    const steps = (_a = data == null ? void 0 : data.steps) == null ? void 0 : _a.map((step) => {
-      delete step.next.history;
-      delete step.previous.history;
-      return step;
-    });
-    console.log(steps);
-    this.history = steps || [];
+    this.history = data.steps;
   }
   undo() {
     if (this.isApplyingChanges)
@@ -9778,11 +9769,9 @@ var NodeHistory = class {
     }
     const { previous } = this.history[this.historyIndex];
     const d = this.system.serialize();
-    const h = d.history;
-    delete d.history;
-    const data = mergeObjects(d, previous);
-    data.history = h;
-    this.system.load(data);
+    const data = mergeObjects(d.nodes, previous);
+    d.nodes = data;
+    this.system.load(d);
     this.historyIndex--;
     this.isApplyingChanges = false;
   }
@@ -9797,11 +9786,9 @@ var NodeHistory = class {
     }
     const { next } = this.history[this.historyIndex + 1];
     const d = this.system.serialize();
-    const h = d.history;
-    delete d.history;
-    const data = mergeObjects(d, next);
-    data.history = h;
-    this.system.load(data);
+    const data = mergeObjects(d.nodes, next);
+    d.nodes = data;
+    this.system.load(d);
     this.historyIndex++;
     this.isApplyingChanges = false;
   }

@@ -3,20 +3,20 @@ import type NodeSystem from './NodeSystem';
 export default class NodeHistory {
     private system;
     history: {
-        previous: unknown;
-        next: unknown;
+        previous: Partial<NodeProps>;
+        next: Partial<NodeProps>;
     }[];
     historyIndex: number;
     isApplyingChanges: boolean;
     log: Logger;
     addAction: NodeHistory['_addAction'];
-    prevState: NodeSystemData;
+    prevState: NodeProps[];
     constructor(system: NodeSystem);
     private _addAction;
     serialize(): {
         steps: {
-            previous: unknown;
-            next: unknown;
+            previous: Partial<NodeProps>;
+            next: Partial<NodeProps>;
         }[];
         index: number;
     };

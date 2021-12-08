@@ -1,0 +1,44 @@
+import type Node from '../model/Node';
+import type System from '../model/NodeSystem';
+import type NodeConnectionView from './NodeConnectionView';
+import type InputView from './NodeInputView';
+import type OutputView from './NodeOutputView';
+import './NodeView.scss';
+export default class NodeView {
+    node: Node;
+    wrapper: HTMLDivElement;
+    outputWrapper: HTMLDivElement;
+    stateWrapper: HTMLDivElement;
+    inputs: InputView[];
+    outputs: OutputView[];
+    active: boolean;
+    x: number;
+    y: number;
+    downX: number;
+    downY: number;
+    mDownX: number;
+    mDownY: number;
+    height: number;
+    width: number;
+    _state: string | undefined;
+    system: System;
+    hoveredConnection: NodeConnectionView;
+    title: HTMLElement;
+    _unsubscribeMouseMove: () => void;
+    _unsubscribeMouseUp: () => void;
+    constructor(node: Node);
+    bindEventListeners(): void;
+    removeEventListeners(): void;
+    set state(s: string | undefined);
+    get state(): string | undefined;
+    handleMouseDown(ev: MouseEvent): void;
+    handleMouseUp(): void;
+    handleMouseMove({ mx: _x, my: _y, keys }: {
+        mx: any;
+        my: any;
+        keys: any;
+    }): void;
+    updateViewPosition(x?: number, y?: number): void;
+    setPosition(x: number, y: number): void;
+    remove(): void;
+}

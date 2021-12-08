@@ -1,0 +1,263 @@
+/* sass:/home/runner/work/plantarium/plantarium/packages/nodesystem/src/index.scss */
+html {
+  height: 100%;
+}
+input,
+select,
+label {
+  padding-left: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  background: transparent;
+  color: var(--outline-color);
+  border: none;
+}
+label {
+  font-size: 0.5em;
+}
+.nodesystem-wrapper {
+  position: relative;
+  height: 100%;
+  background: var(--background-color, #1a1a1a);
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* sass:/home/runner/work/plantarium/plantarium/packages/nodesystem/src/view/ConnectionView.scss */
+.node-connection-path {
+  fill: none;
+  stroke: grey;
+  stroke-width: 0.1em;
+  stroke-linecap: butt;
+  pointer-events: none;
+}
+.node-connection-hover {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0);
+  stroke-width: 1em;
+  pointer-events: all;
+}
+.node-connection-hover:hover {
+  opacity: 0.8;
+}
+.node-connection-path.hover-active {
+  filter: drop-shadow(0px 0px 2px hotpink);
+}
+
+/* sass:/home/runner/work/plantarium/plantarium/packages/nodesystem/src/view/NodeStateView.scss */
+.node-state-single-wrapper {
+  position: relative;
+  padding: 0px 5px;
+  margin: 5px 0px;
+  --width: 100%;
+}
+.node-state-single-wrapper.disabled > .node-state-input {
+  opacity: 0.2;
+  pointer-events: none;
+}
+.node-state-single-wrapper > .state-label {
+  font-size: smaller;
+  margin: 2px 0px;
+  opacity: 0.3;
+}
+.node-state-single-wrapper.hide-label > .state-label {
+  display: none;
+}
+.node-state-single-wrapper.disabled > .node-state-input {
+  display: none;
+}
+.node-state-single-wrapper.disabled > .state-label {
+  display: block;
+}
+
+/* sass:/home/runner/work/plantarium/plantarium/packages/nodesystem/src/view/NodeInputView.scss */
+.node-input-wrapper {
+  position: absolute;
+  top: 8.5px;
+  left: -3.5px;
+  width: 3.5px;
+  height: 7px;
+  box-sizing: border-box;
+  border-radius: 7px 0px 0px 7px;
+}
+.socket-state-highlight {
+  box-shadow: 0px 0px 5px hotpink;
+}
+.socket-state-potential {
+  box-shadow: 0px 0px 5px green;
+}
+.socket-state-middle {
+  box-shadow: 0px 0px 5px orangered;
+}
+
+/* sass:/home/runner/work/plantarium/plantarium/packages/nodesystem/src/view/NodeView.scss */
+.node-wrapper {
+  position: absolute;
+  background-color: var(--foreground-color, #303030);
+  border-radius: 5px;
+  box-sizing: content-box;
+  min-height: 50px;
+  max-width: 200px;
+  color: var(--text-color, #f0f0f0);
+  box-shadow:
+    0px 2px 3px rgba(0, 0, 0, 0.13),
+    1px 2px 2px rgba(0, 0, 0, 0.1),
+    -1px -2px 2px rgba(0, 0, 0, 0.05);
+}
+.node-wrapper > .node-title {
+  color: var(--text-color, #f0f0f0);
+  pointer-events: none;
+  user-select: none;
+  white-space: pre;
+  font-size: 1em;
+  margin: 0;
+  padding: 2px;
+  padding-left: 4px;
+  opacity: 1;
+  border-bottom: solid 2px #469c6e;
+  border-radius: 4px 4px 0px 0px;
+}
+.node-wrapper.node-active {
+  box-shadow: 0px 0px 0px 1px white;
+}
+.node-wrapper.node-dragging {
+  pointer-events: none;
+  box-shadow: 0px 0px 0px 1px white;
+}
+.node-wrapper.node-selected {
+  box-shadow: 0px 0px 0px 1px #469c6e;
+}
+.node-outputs-wrapper {
+  width: 0px;
+  right: 0px;
+  top: 2px;
+  position: absolute;
+}
+.socket-type-all {
+  background: conic-gradient(red, orange, yellow, green, blue, purple);
+}
+
+/* sass:/home/runner/work/plantarium/plantarium/packages/nodesystem/src/view/AddMenu.scss */
+.search-container {
+  padding: 2px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.search-container.focused {
+  background-color: var(--foreground-color, #303030);
+  color: var(--text-color, #f0f0f0);
+}
+.context-wrapper {
+  z-index: 99;
+  position: absolute;
+  width: 100px;
+  opacity: 0;
+  transform: translateX(0px) translateY(0px) scale(0.7);
+  transition: opacity 0.05s linear, transform 0.1s ease;
+  pointer-events: none;
+  background-color: var(--background-color, #1a1a1a);
+  border-radius: 5px;
+  color: #707070;
+  box-shadow:
+    0px 2px 3px rgba(0, 0, 0, 0.13),
+    1px 2px 2px rgba(0, 0, 0, 0.1),
+    -1px -2px 2px rgba(0, 0, 0, 0.05);
+}
+.context-wrapper input {
+  width: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(to right, #65e2a0, #469c6e);
+  margin: 0;
+  border-radius: 3px 3px 0px 0px;
+  padding-top: 2px;
+  margin-top: -2px;
+  transform: translateY(-1px);
+}
+.context-wrapper p {
+  top: 43px;
+  left: 50px;
+  margin: 0;
+  padding: 0;
+  width: fit-content;
+  text-align: center;
+  transform-origin: 50% 50%;
+}
+.context-visible {
+  opacity: 1;
+  pointer-events: all;
+  transform: scale(1);
+}
+
+/* sass:/home/runner/work/plantarium/plantarium/packages/nodesystem/src/view/BoxSelection.scss */
+.box-selection-wrapper {
+  border: solid thin #e2e2e288;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 0%;
+  height: 0%;
+}
+.box-selection-visible {
+  opacity: 1;
+}
+
+/* sass:/home/runner/work/plantarium/plantarium/packages/nodesystem/src/view/NodeOutputView.scss */
+.node-output-wrapper {
+  margin-top: 7px;
+  width: 3.5px;
+  height: 7px;
+  box-sizing: border-box;
+  border-radius: 0px 10px 10px 0px;
+  position: relative;
+}
+
+/* sass:/home/runner/work/plantarium/plantarium/packages/nodesystem/src/view/NodeSystemView.scss */
+.nodesystem-transform {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.nodesystem-transform > .nodes-container {
+  position: relative;
+  width: 0px;
+  height: 0px;
+  left: 50%;
+  top: 50%;
+  overflow: visible;
+  z-index: 1;
+}
+.nodesystem-transform > svg {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+  width: 1px !important;
+  height: 1px !important;
+  left: 50%;
+  top: 50%;
+  z-index: 0;
+}
+.nodesystem-transform > svg > path {
+  stroke-linecap: round;
+}
+.nodesystem-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  --node-editor-bg: var(--text-color, #303030);
+  --node-editor-grid-size: 1.5rem;
+  --node-editor-grid-width: 1px;
+  background-image: radial-gradient(#ffffff11 var(--node-editor-grid-width), transparent var(--node-editor-grid-width));
+  background-size: var(--node-editor-grid-size) var(--node-editor-grid-size);
+}
+.nodesystem-wrapper.nodesystem-state-dragging {
+  cursor: grab;
+}
+/*# sourceMappingURL=index.esm.css.map */

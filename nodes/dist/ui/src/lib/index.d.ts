@@ -12,10 +12,11 @@ import InputFloat from './InputFloat.svelte';
 import InputSelect from './InputSelect.svelte';
 import InputShape from './InputShape.svelte';
 import InputSlider from './InputSlider.svelte';
+import InputSearch from './InputSearch.svelte';
 import Section from './Section.svelte';
 import StackTrace from "./toast/StackTrace.svelte";
 import type { SvelteComponentDev } from 'svelte/internal/index';
-export { InputFloat, InputInteger, InputSlider, InputSelect, InputCheckbox, InputCurve, InputShape, InputColor, Button, Icon, Section, AlertWrapper, createAlert, ToastWrapper, createToast, StackTrace };
+export { InputFloat, InputInteger, InputSlider, InputSelect, InputCheckbox, InputCurve, InputShape, InputSearch, InputColor, Button, Icon, Section, AlertWrapper, createAlert, ToastWrapper, createToast, StackTrace };
 export declare function stateToElement({ target, template, value, }: {
     target: HTMLElement;
     template: ValueTemplate;

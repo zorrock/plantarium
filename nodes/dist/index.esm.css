@@ -5,11 +5,11 @@ html {
 input,
 select,
 label {
-  padding-left: 0 !important;
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
+  padding-left: 0;
+  margin-top: 0;
+  padding-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
   background: transparent;
   color: var(--outline-color);
   border: none;
@@ -143,55 +143,19 @@ label {
   background: conic-gradient(red, orange, yellow, green, blue, purple);
 }
 
-/* sass:/home/runner/work/plantarium/plantarium/packages/nodesystem/src/view/AddMenu.scss */
-.search-container {
-  padding: 2px;
-  width: 100%;
-  box-sizing: border-box;
-}
-.search-container.focused {
-  background-color: var(--foreground-color, #303030);
-  color: var(--text-color, #f0f0f0);
-}
+/* src/view/AddMenu.css */
 .context-wrapper {
-  z-index: 99;
   position: absolute;
-  width: 100px;
   opacity: 0;
-  transform: translateX(0px) translateY(0px) scale(0.7);
-  transition: opacity 0.05s linear, transform 0.1s ease;
+  transform-origin: 0px 0px;
+  transform: scale(0.4);
   pointer-events: none;
-  background-color: var(--background-color, #1a1a1a);
-  border-radius: 5px;
-  color: #707070;
-  box-shadow:
-    0px 2px 3px rgba(0, 0, 0, 0.13),
-    1px 2px 2px rgba(0, 0, 0, 0.1),
-    -1px -2px 2px rgba(0, 0, 0, 0.05);
+  transition: opacity 0.1s ease, transform 0.1s ease;
 }
-.context-wrapper input {
-  width: 100%;
-  box-sizing: border-box;
-  background: linear-gradient(to right, #65e2a0, #469c6e);
-  margin: 0;
-  border-radius: 3px 3px 0px 0px;
-  padding-top: 2px;
-  margin-top: -2px;
-  transform: translateY(-1px);
-}
-.context-wrapper p {
-  top: 43px;
-  left: 50px;
-  margin: 0;
-  padding: 0;
-  width: fit-content;
-  text-align: center;
-  transform-origin: 50% 50%;
-}
-.context-visible {
+.context-wrapper.context-visible {
   opacity: 1;
-  pointer-events: all;
   transform: scale(1);
+  pointer-events: all;
 }
 
 /* sass:/home/runner/work/plantarium/plantarium/packages/nodesystem/src/view/BoxSelection.scss */

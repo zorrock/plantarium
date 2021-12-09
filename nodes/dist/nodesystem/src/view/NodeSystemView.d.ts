@@ -67,6 +67,7 @@ export default class NodeSystemView extends EventEmitter {
         y?: number;
         s?: number;
     }): void;
+    private showAddMenu;
     bindEventListeners(): void;
     handleResize(): void;
     handleMouseMove(ev: MouseEvent): void;

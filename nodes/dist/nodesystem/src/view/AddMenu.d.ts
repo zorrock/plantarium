@@ -1,4 +1,4 @@
-import "./AddMenu.css";
+import './AddMenu.css';
 import type NodeSystemView from './NodeSystemView';
 import type NodeInput from '../model/NodeInput';
 import type NodeOutput from '../model/NodeOutput';
@@ -13,7 +13,7 @@ interface ContextOptions {
 }
 export default class RightClickMenu {
     wrapper: HTMLDivElement;
-    search: InputSearch;
+    searchEl: InputSearch;
     view: NodeSystemView;
     system: NodeSystem;
     x: number;
@@ -26,8 +26,8 @@ export default class RightClickMenu {
     constructor(view: NodeSystemView);
     updateTypes(types: NodeType[]): void;
     handleWindowClick(ev: MouseEvent): void;
-    reject(): void;
-    resolve(typeName: string): void;
+    private reject;
+    private resolve;
     hide(): void;
     show({ x, y, socket }: ContextOptions): Promise<NodeProps>;
 }

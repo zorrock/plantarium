@@ -1,1 +1,1 @@
-export default function memoize(func: (...args: any[]) => unknown): (...args: any[]) => unknown;
+export default function memoize(func: (...args: unknown[]) => unknown): (...args: unknown[]) => unknown;

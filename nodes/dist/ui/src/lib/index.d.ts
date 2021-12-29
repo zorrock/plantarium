@@ -14,12 +14,12 @@ import InputShape from './InputShape.svelte';
 import InputSlider from './InputSlider.svelte';
 import InputSearch from './InputSearch.svelte';
 import Section from './Section.svelte';
-import StackTrace from "./toast/StackTrace.svelte";
-import type { SvelteComponentDev } from 'svelte/internal/index';
+import StackTrace from './toast/StackTrace.svelte';
+import type { SvelteComponent } from 'svelte';
 export { InputFloat, InputInteger, InputSlider, InputSelect, InputCheckbox, InputCurve, InputShape, InputSearch, InputColor, Button, Icon, Section, AlertWrapper, createAlert, ToastWrapper, createToast, StackTrace };
-export declare function stateToElement({ target, template, value, }: {
+export declare function stateToElement({ target, template, value }: {
     target: HTMLElement;
     template: ValueTemplate;
     value: unknown;
-}): AlertWrapper;
-export declare function stateToComponent(template: ValueTemplate, value: unknown): typeof SvelteComponentDev;
+}): SvelteComponent;
+export declare function stateToComponent(template: ValueTemplate, value: unknown): typeof SvelteComponent;

@@ -595,7 +595,7 @@ function throttle(_func, wait) {
     args = arguments;
     if (remaining <= 0 || remaining > wait) {
       if (timeout) {
-        window.clearTimeout(timeout);
+        clearTimeout(timeout);
         timeout = null;
       }
       previous = now;
@@ -603,7 +603,7 @@ function throttle(_func, wait) {
       if (!timeout)
         context = args = null;
     } else if (!timeout) {
-      timeout = window.setTimeout(later, remaining);
+      timeout = setTimeout(later, remaining);
     }
     return result;
   };
@@ -4689,16 +4689,17 @@ var RightClickMenu = class {
     this.log = new Logger(this);
     this.wrapper = document.createElement("div");
     this.wrapper.classList.add("context-wrapper");
-    this.search = new InputSearch_default({ target: this.wrapper });
-    this.search.$on("input", ({ detail: value }) => {
+    this.searchEl = new InputSearch_default({ target: this.wrapper });
+    this.searchEl.$on("input", ({ detail: value }) => {
       this.resolve(value);
     });
     this.view.wrapper.append(this.wrapper);
     this.view.system.store.on("types", (types2) => this.updateTypes(types2), 20);
+    this.wrapper.classList.add("cl-" + Math.floor(Math.random() * 1e3));
     this.view.on("keydown", ({ key }) => key === "Escape" && this.hide());
   }
   updateTypes(types2) {
-    this.search.setItems(types2.map((t) => {
+    this.searchEl.setItems(types2.map((t) => {
       return {
         value: t.type || t.title,
         title: t.title
@@ -4743,7 +4744,7 @@ var RightClickMenu = class {
     this.hide();
   }
   hide() {
-    this.search.clear();
+    this.searchEl.clear();
     this.wrapper.classList.remove("context-visible");
     this.wrapper.blur();
     this.res = (d) => d;
@@ -4757,10 +4758,10 @@ var RightClickMenu = class {
     this.socket = socket;
     this.wrapper.style.left = x / this.system.view.width * 100 + "%";
     this.wrapper.style.top = y / this.system.view.height * 100 + "%";
+    this.wrapper.classList.add("context-visible");
     setTimeout(() => {
-      this.wrapper.classList.add("context-visible");
-      this.search.focus();
-    }, 10);
+      this.searchEl.focus();
+    }, 20);
     return new Promise((res, rej) => {
       this.res = res;
       this.rej = rej;
@@ -5344,7 +5345,7 @@ var NodeSystemView = class extends EventEmitter {
     const { shiftKey, ctrlKey, clientX, clientY, button, target } = ev;
     if (!shiftKey)
       this.setActive();
-    if (![...ev["path"]].includes(this.addMenu.wrapper)) {
+    if (ev["path"] && ![...ev["path"]].includes(this.addMenu.wrapper)) {
       this.addMenu.hide();
       ev.preventDefault();
     }

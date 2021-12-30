@@ -24,18 +24,18 @@ var __spreadValues = (a, b) => {
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
 var __commonJS = (cb, mod) => function __require() {
-  return mod || (0, cb[Object.keys(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
-var __reExport = (target, module, desc) => {
+var __reExport = (target, module, copyDefault, desc) => {
   if (module && typeof module === "object" || typeof module === "function") {
     for (let key of __getOwnPropNames(module))
-      if (!__hasOwnProp.call(target, key) && key !== "default")
+      if (!__hasOwnProp.call(target, key) && (copyDefault || key !== "default"))
         __defProp(target, key, { get: () => module[key], enumerable: !(desc = __getOwnPropDesc(module, key)) || desc.enumerable });
   }
   return target;
 };
-var __toModule = (module) => {
-  return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", module && module.__esModule && "default" in module ? { get: () => module.default, enumerable: true } : { value: module, enumerable: true })), module);
+var __toESM = (module, isNodeMode) => {
+  return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", !isNodeMode && module && module.__esModule ? { get: () => module.default, enumerable: true } : { value: module, enumerable: true })), module);
 };
 var __decorateClass = (decorators, target, key, kind) => {
   var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
@@ -569,7 +569,7 @@ function Debounce(wait, immediate = false) {
 }
 
 // ../helpers/src/download.ts
-var import_file_saver = __toModule(require_FileSaver_min());
+var import_file_saver = __toESM(require_FileSaver_min(), 1);
 
 // ../helpers/src/throttle.ts
 function throttle(_func, wait) {
@@ -705,6 +705,381 @@ var genId_default = () => {
   return genID;
 };
 
+// ../../node_modules/.pnpm/svelte@3.44.3/node_modules/svelte/internal/index.mjs
+function noop() {
+}
+function run(fn) {
+  return fn();
+}
+function blank_object() {
+  return Object.create(null);
+}
+function run_all(fns) {
+  fns.forEach(run);
+}
+function is_function(thing) {
+  return typeof thing === "function";
+}
+function safe_not_equal(a, b) {
+  return a != a ? b == b : a !== b || (a && typeof a === "object" || typeof a === "function");
+}
+function is_empty(obj) {
+  return Object.keys(obj).length === 0;
+}
+var is_hydrating = false;
+function start_hydrating() {
+  is_hydrating = true;
+}
+function end_hydrating() {
+  is_hydrating = false;
+}
+function append(target, node2) {
+  target.appendChild(node2);
+}
+function insert(target, node2, anchor) {
+  target.insertBefore(node2, anchor || null);
+}
+function detach(node2) {
+  node2.parentNode.removeChild(node2);
+}
+function destroy_each(iterations, detaching) {
+  for (let i = 0; i < iterations.length; i += 1) {
+    if (iterations[i])
+      iterations[i].d(detaching);
+  }
+}
+function element(name) {
+  return document.createElement(name);
+}
+function svg_element(name) {
+  return document.createElementNS("http://www.w3.org/2000/svg", name);
+}
+function text(data) {
+  return document.createTextNode(data);
+}
+function space() {
+  return text(" ");
+}
+function empty() {
+  return text("");
+}
+function listen(node2, event, handler, options) {
+  node2.addEventListener(event, handler, options);
+  return () => node2.removeEventListener(event, handler, options);
+}
+function attr(node2, attribute, value) {
+  if (value == null)
+    node2.removeAttribute(attribute);
+  else if (node2.getAttribute(attribute) !== value)
+    node2.setAttribute(attribute, value);
+}
+function to_number(value) {
+  return value === "" ? null : +value;
+}
+function children(element2) {
+  return Array.from(element2.childNodes);
+}
+function set_data(text2, data) {
+  data = "" + data;
+  if (text2.wholeText !== data)
+    text2.data = data;
+}
+function set_input_value(input, value) {
+  input.value = value == null ? "" : value;
+}
+function set_style(node2, key, value, important) {
+  node2.style.setProperty(key, value, important ? "important" : "");
+}
+function toggle_class(element2, name, toggle) {
+  element2.classList[toggle ? "add" : "remove"](name);
+}
+function custom_event(type, detail, bubbles = false) {
+  const e = document.createEvent("CustomEvent");
+  e.initCustomEvent(type, bubbles, false, detail);
+  return e;
+}
+var current_component;
+function set_current_component(component) {
+  current_component = component;
+}
+function get_current_component() {
+  if (!current_component)
+    throw new Error("Function called outside component initialization");
+  return current_component;
+}
+function createEventDispatcher() {
+  const component = get_current_component();
+  return (type, detail) => {
+    const callbacks = component.$$.callbacks[type];
+    if (callbacks) {
+      const event = custom_event(type, detail);
+      callbacks.slice().forEach((fn) => {
+        fn.call(component, event);
+      });
+    }
+  };
+}
+var dirty_components = [];
+var binding_callbacks = [];
+var render_callbacks = [];
+var flush_callbacks = [];
+var resolved_promise = Promise.resolve();
+var update_scheduled = false;
+function schedule_update() {
+  if (!update_scheduled) {
+    update_scheduled = true;
+    resolved_promise.then(flush);
+  }
+}
+function add_render_callback(fn) {
+  render_callbacks.push(fn);
+}
+var seen_callbacks = /* @__PURE__ */ new Set();
+var flushidx = 0;
+function flush() {
+  const saved_component = current_component;
+  do {
+    while (flushidx < dirty_components.length) {
+      const component = dirty_components[flushidx];
+      flushidx++;
+      set_current_component(component);
+      update(component.$$);
+    }
+    set_current_component(null);
+    dirty_components.length = 0;
+    flushidx = 0;
+    while (binding_callbacks.length)
+      binding_callbacks.pop()();
+    for (let i = 0; i < render_callbacks.length; i += 1) {
+      const callback = render_callbacks[i];
+      if (!seen_callbacks.has(callback)) {
+        seen_callbacks.add(callback);
+        callback();
+      }
+    }
+    render_callbacks.length = 0;
+  } while (dirty_components.length);
+  while (flush_callbacks.length) {
+    flush_callbacks.pop()();
+  }
+  update_scheduled = false;
+  seen_callbacks.clear();
+  set_current_component(saved_component);
+}
+function update($$) {
+  if ($$.fragment !== null) {
+    $$.update();
+    run_all($$.before_update);
+    const dirty = $$.dirty;
+    $$.dirty = [-1];
+    $$.fragment && $$.fragment.p($$.ctx, dirty);
+    $$.after_update.forEach(add_render_callback);
+  }
+}
+var outroing = /* @__PURE__ */ new Set();
+function transition_in(block, local) {
+  if (block && block.i) {
+    outroing.delete(block);
+    block.i(local);
+  }
+}
+var globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : global;
+function mount_component(component, target, anchor, customElement) {
+  const { fragment, on_mount, on_destroy, after_update } = component.$$;
+  fragment && fragment.m(target, anchor);
+  if (!customElement) {
+    add_render_callback(() => {
+      const new_on_destroy = on_mount.map(run).filter(is_function);
+      if (on_destroy) {
+        on_destroy.push(...new_on_destroy);
+      } else {
+        run_all(new_on_destroy);
+      }
+      component.$$.on_mount = [];
+    });
+  }
+  after_update.forEach(add_render_callback);
+}
+function destroy_component(component, detaching) {
+  const $$ = component.$$;
+  if ($$.fragment !== null) {
+    run_all($$.on_destroy);
+    $$.fragment && $$.fragment.d(detaching);
+    $$.on_destroy = $$.fragment = null;
+    $$.ctx = [];
+  }
+}
+function make_dirty(component, i) {
+  if (component.$$.dirty[0] === -1) {
+    dirty_components.push(component);
+    schedule_update();
+    component.$$.dirty.fill(0);
+  }
+  component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
+}
+function init(component, options, instance8, create_fragment8, not_equal, props, append_styles, dirty = [-1]) {
+  const parent_component = current_component;
+  set_current_component(component);
+  const $$ = component.$$ = {
+    fragment: null,
+    ctx: null,
+    props,
+    update: noop,
+    not_equal,
+    bound: blank_object(),
+    on_mount: [],
+    on_destroy: [],
+    on_disconnect: [],
+    before_update: [],
+    after_update: [],
+    context: new Map(options.context || (parent_component ? parent_component.$$.context : [])),
+    callbacks: blank_object(),
+    dirty,
+    skip_bound: false,
+    root: options.target || parent_component.$$.root
+  };
+  append_styles && append_styles($$.root);
+  let ready = false;
+  $$.ctx = instance8 ? instance8(component, options.props || {}, (i, ret, ...rest) => {
+    const value = rest.length ? rest[0] : ret;
+    if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
+      if (!$$.skip_bound && $$.bound[i])
+        $$.bound[i](value);
+      if (ready)
+        make_dirty(component, i);
+    }
+    return ret;
+  }) : [];
+  $$.update();
+  ready = true;
+  run_all($$.before_update);
+  $$.fragment = create_fragment8 ? create_fragment8($$.ctx) : false;
+  if (options.target) {
+    if (options.hydrate) {
+      start_hydrating();
+      const nodes = children(options.target);
+      $$.fragment && $$.fragment.l(nodes);
+      nodes.forEach(detach);
+    } else {
+      $$.fragment && $$.fragment.c();
+    }
+    if (options.intro)
+      transition_in(component.$$.fragment);
+    mount_component(component, options.target, options.anchor, options.customElement);
+    end_hydrating();
+    flush();
+  }
+  set_current_component(parent_component);
+}
+var SvelteElement;
+if (typeof HTMLElement === "function") {
+  SvelteElement = class extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+    }
+    connectedCallback() {
+      const { on_mount } = this.$$;
+      this.$$.on_disconnect = on_mount.map(run).filter(is_function);
+      for (const key in this.$$.slotted) {
+        this.appendChild(this.$$.slotted[key]);
+      }
+    }
+    attributeChangedCallback(attr2, _oldValue, newValue) {
+      this[attr2] = newValue;
+    }
+    disconnectedCallback() {
+      run_all(this.$$.on_disconnect);
+    }
+    $destroy() {
+      destroy_component(this, 1);
+      this.$destroy = noop;
+    }
+    $on(type, callback) {
+      const callbacks = this.$$.callbacks[type] || (this.$$.callbacks[type] = []);
+      callbacks.push(callback);
+      return () => {
+        const index = callbacks.indexOf(callback);
+        if (index !== -1)
+          callbacks.splice(index, 1);
+      };
+    }
+    $set($$props) {
+      if (this.$$set && !is_empty($$props)) {
+        this.$$.skip_bound = true;
+        this.$$set($$props);
+        this.$$.skip_bound = false;
+      }
+    }
+  };
+}
+var SvelteComponent2 = class {
+  $destroy() {
+    destroy_component(this, 1);
+    this.$destroy = noop;
+  }
+  $on(type, callback) {
+    const callbacks = this.$$.callbacks[type] || (this.$$.callbacks[type] = []);
+    callbacks.push(callback);
+    return () => {
+      const index = callbacks.indexOf(callback);
+      if (index !== -1)
+        callbacks.splice(index, 1);
+    };
+  }
+  $set($$props) {
+    if (this.$$set && !is_empty($$props)) {
+      this.$$.skip_bound = true;
+      this.$$set($$props);
+      this.$$.skip_bound = false;
+    }
+  }
+};
+
+// ../../node_modules/.pnpm/svelte@3.44.3/node_modules/svelte/store/index.mjs
+var subscriber_queue = [];
+function writable(value, start = noop) {
+  let stop;
+  const subscribers = /* @__PURE__ */ new Set();
+  function set(new_value) {
+    if (safe_not_equal(value, new_value)) {
+      value = new_value;
+      if (stop) {
+        const run_queue = !subscriber_queue.length;
+        for (const subscriber of subscribers) {
+          subscriber[1]();
+          subscriber_queue.push(subscriber, value);
+        }
+        if (run_queue) {
+          for (let i = 0; i < subscriber_queue.length; i += 2) {
+            subscriber_queue[i][0](subscriber_queue[i + 1]);
+          }
+          subscriber_queue.length = 0;
+        }
+      }
+    }
+  }
+  function update2(fn) {
+    set(fn(value));
+  }
+  function subscribe2(run2, invalidate = noop) {
+    const subscriber = [run2, invalidate];
+    subscribers.add(subscriber);
+    if (subscribers.size === 1) {
+      stop = start(set) || noop;
+    }
+    run2(value);
+    return () => {
+      subscribers.delete(subscriber);
+      if (subscribers.size === 0) {
+        stop();
+        stop = null;
+      }
+    };
+  }
+  return { set, update: update2, subscribe: subscribe2 };
+}
+
 // ../helpers/src/logger.ts
 var filters = [];
 var level = 2;
@@ -756,35 +1131,54 @@ var colors = [
   "#ffffff",
   "#ffff00"
 ];
+var localStorageId = "plant.log.history";
+var hasLocalStorage = "localStorage" in globalThis;
+var history = hasLocalStorage ? localStorageId in localStorage ? JSON.parse(localStorage.getItem(localStorageId)) : [] : [];
+function saveHistory() {
+  hasLocalStorage && localStorage.setItem(localStorageId, JSON.stringify(history));
+}
+var store2;
 function log(scope) {
   longestName = Math.max(longestName, scope.length);
   const myIndex = currentIndex;
   scopes[scope] = colors[currentIndex];
   currentIndex++;
-  const log3 = (...args) => {
-    if ((!filters.length || filters.includes(scope)) && level === 0) {
-      if (typeof args[0] === "string" && typeof args[1] === "object") {
+  const handleLog = (args, _level) => {
+    history.push({ scope, args, level });
+    history.length = Math.min(100, history.length);
+    if (store2)
+      store2.set(history);
+    saveHistory();
+    if ((!filters.length || filters.includes(scope)) && _level <= level) {
+      if (args instanceof Error || _level === 2) {
+        console.error(`[${scope.padEnd(longestName, " ")}]`, args);
+        return;
+      }
+      if (Array.isArray(args) && typeof args[0] === "string" && typeof args[1] === "object") {
         console.groupCollapsed(`%c[${scope.padEnd(longestName, " ")}]`, `color: hsl(${myIndex * 30}deg 68% 64%); font-weight: bold;`, args[0]);
         console.log(...args.slice(1));
         console.groupEnd();
         return;
       }
-      console.log(`%c[${scope.padEnd(longestName, " ")}]`, `color: hsl(${myIndex * 30}deg 68% 64%); font-weight: bold;`, ...args);
+      if (_level === 0) {
+        console.log(`%c[${scope.padEnd(longestName, " ")}]`, `color: hsl(${myIndex * 30}deg 68% 64%); font-weight: bold;`, ...args);
+      }
+      if (_level === 1) {
+        console.warn(`[${scope.padEnd(longestName, " ")}]`, ...args);
+      }
     }
   };
-  log3.group = (...args) => {
-    if (level < 1)
-      console.groupCollapsed(`%c[${scope.padEnd(longestName, " ")}]`, `color: hsl(${myIndex * 30}deg 68% 64%); font-weight: bold;`, ...args);
-  };
-  log3.warn = (...args) => {
-    if (level <= 1)
-      console.warn(`[${scope.padEnd(longestName, " ")}]`, ...args);
-  };
-  log3.error = (err) => {
-    console.error(`[${scope.padEnd(longestName, " ")}]`, err);
-  };
+  const log3 = (...args) => handleLog(args, 0);
+  log3.warn = (...args) => handleLog(args, 1);
+  log3.error = (err) => handleLog(err, 2);
   return log3;
 }
+log.getStore = function() {
+  if (store2)
+    return store2;
+  store2 = writable([]);
+  return store2;
+};
 log.setFilter = (...f) => {
   filters = f;
 };
@@ -1899,365 +2293,6 @@ var Number_default = {
   }
 };
 
-// ../../node_modules/.pnpm/svelte@3.44.2/node_modules/svelte/internal/index.mjs
-function noop() {
-}
-function run(fn) {
-  return fn();
-}
-function blank_object() {
-  return Object.create(null);
-}
-function run_all(fns) {
-  fns.forEach(run);
-}
-function is_function(thing) {
-  return typeof thing === "function";
-}
-function safe_not_equal(a, b) {
-  return a != a ? b == b : a !== b || (a && typeof a === "object" || typeof a === "function");
-}
-function is_empty(obj) {
-  return Object.keys(obj).length === 0;
-}
-var tasks = new Set();
-var is_hydrating = false;
-function start_hydrating() {
-  is_hydrating = true;
-}
-function end_hydrating() {
-  is_hydrating = false;
-}
-function append(target, node2) {
-  target.appendChild(node2);
-}
-function insert(target, node2, anchor) {
-  target.insertBefore(node2, anchor || null);
-}
-function detach(node2) {
-  node2.parentNode.removeChild(node2);
-}
-function destroy_each(iterations, detaching) {
-  for (let i = 0; i < iterations.length; i += 1) {
-    if (iterations[i])
-      iterations[i].d(detaching);
-  }
-}
-function element(name) {
-  return document.createElement(name);
-}
-function svg_element(name) {
-  return document.createElementNS("http://www.w3.org/2000/svg", name);
-}
-function text(data) {
-  return document.createTextNode(data);
-}
-function space() {
-  return text(" ");
-}
-function empty() {
-  return text("");
-}
-function listen(node2, event, handler, options) {
-  node2.addEventListener(event, handler, options);
-  return () => node2.removeEventListener(event, handler, options);
-}
-function attr(node2, attribute, value) {
-  if (value == null)
-    node2.removeAttribute(attribute);
-  else if (node2.getAttribute(attribute) !== value)
-    node2.setAttribute(attribute, value);
-}
-function to_number(value) {
-  return value === "" ? null : +value;
-}
-function children(element2) {
-  return Array.from(element2.childNodes);
-}
-function set_data(text2, data) {
-  data = "" + data;
-  if (text2.wholeText !== data)
-    text2.data = data;
-}
-function set_input_value(input, value) {
-  input.value = value == null ? "" : value;
-}
-function set_style(node2, key, value, important) {
-  node2.style.setProperty(key, value, important ? "important" : "");
-}
-function toggle_class(element2, name, toggle) {
-  element2.classList[toggle ? "add" : "remove"](name);
-}
-function custom_event(type, detail, bubbles = false) {
-  const e = document.createEvent("CustomEvent");
-  e.initCustomEvent(type, bubbles, false, detail);
-  return e;
-}
-var active_docs = new Set();
-var current_component;
-function set_current_component(component) {
-  current_component = component;
-}
-function get_current_component() {
-  if (!current_component)
-    throw new Error("Function called outside component initialization");
-  return current_component;
-}
-function createEventDispatcher() {
-  const component = get_current_component();
-  return (type, detail) => {
-    const callbacks = component.$$.callbacks[type];
-    if (callbacks) {
-      const event = custom_event(type, detail);
-      callbacks.slice().forEach((fn) => {
-        fn.call(component, event);
-      });
-    }
-  };
-}
-var dirty_components = [];
-var binding_callbacks = [];
-var render_callbacks = [];
-var flush_callbacks = [];
-var resolved_promise = Promise.resolve();
-var update_scheduled = false;
-function schedule_update() {
-  if (!update_scheduled) {
-    update_scheduled = true;
-    resolved_promise.then(flush);
-  }
-}
-function add_render_callback(fn) {
-  render_callbacks.push(fn);
-}
-var flushing = false;
-var seen_callbacks = new Set();
-function flush() {
-  if (flushing)
-    return;
-  flushing = true;
-  do {
-    for (let i = 0; i < dirty_components.length; i += 1) {
-      const component = dirty_components[i];
-      set_current_component(component);
-      update(component.$$);
-    }
-    set_current_component(null);
-    dirty_components.length = 0;
-    while (binding_callbacks.length)
-      binding_callbacks.pop()();
-    for (let i = 0; i < render_callbacks.length; i += 1) {
-      const callback = render_callbacks[i];
-      if (!seen_callbacks.has(callback)) {
-        seen_callbacks.add(callback);
-        callback();
-      }
-    }
-    render_callbacks.length = 0;
-  } while (dirty_components.length);
-  while (flush_callbacks.length) {
-    flush_callbacks.pop()();
-  }
-  update_scheduled = false;
-  flushing = false;
-  seen_callbacks.clear();
-}
-function update($$) {
-  if ($$.fragment !== null) {
-    $$.update();
-    run_all($$.before_update);
-    const dirty = $$.dirty;
-    $$.dirty = [-1];
-    $$.fragment && $$.fragment.p($$.ctx, dirty);
-    $$.after_update.forEach(add_render_callback);
-  }
-}
-var outroing = new Set();
-function transition_in(block, local) {
-  if (block && block.i) {
-    outroing.delete(block);
-    block.i(local);
-  }
-}
-var globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : global;
-var boolean_attributes = new Set([
-  "allowfullscreen",
-  "allowpaymentrequest",
-  "async",
-  "autofocus",
-  "autoplay",
-  "checked",
-  "controls",
-  "default",
-  "defer",
-  "disabled",
-  "formnovalidate",
-  "hidden",
-  "ismap",
-  "loop",
-  "multiple",
-  "muted",
-  "nomodule",
-  "novalidate",
-  "open",
-  "playsinline",
-  "readonly",
-  "required",
-  "reversed",
-  "selected"
-]);
-function mount_component(component, target, anchor, customElement) {
-  const { fragment, on_mount, on_destroy, after_update } = component.$$;
-  fragment && fragment.m(target, anchor);
-  if (!customElement) {
-    add_render_callback(() => {
-      const new_on_destroy = on_mount.map(run).filter(is_function);
-      if (on_destroy) {
-        on_destroy.push(...new_on_destroy);
-      } else {
-        run_all(new_on_destroy);
-      }
-      component.$$.on_mount = [];
-    });
-  }
-  after_update.forEach(add_render_callback);
-}
-function destroy_component(component, detaching) {
-  const $$ = component.$$;
-  if ($$.fragment !== null) {
-    run_all($$.on_destroy);
-    $$.fragment && $$.fragment.d(detaching);
-    $$.on_destroy = $$.fragment = null;
-    $$.ctx = [];
-  }
-}
-function make_dirty(component, i) {
-  if (component.$$.dirty[0] === -1) {
-    dirty_components.push(component);
-    schedule_update();
-    component.$$.dirty.fill(0);
-  }
-  component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
-}
-function init(component, options, instance8, create_fragment8, not_equal, props, append_styles, dirty = [-1]) {
-  const parent_component = current_component;
-  set_current_component(component);
-  const $$ = component.$$ = {
-    fragment: null,
-    ctx: null,
-    props,
-    update: noop,
-    not_equal,
-    bound: blank_object(),
-    on_mount: [],
-    on_destroy: [],
-    on_disconnect: [],
-    before_update: [],
-    after_update: [],
-    context: new Map(options.context || (parent_component ? parent_component.$$.context : [])),
-    callbacks: blank_object(),
-    dirty,
-    skip_bound: false,
-    root: options.target || parent_component.$$.root
-  };
-  append_styles && append_styles($$.root);
-  let ready = false;
-  $$.ctx = instance8 ? instance8(component, options.props || {}, (i, ret, ...rest) => {
-    const value = rest.length ? rest[0] : ret;
-    if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
-      if (!$$.skip_bound && $$.bound[i])
-        $$.bound[i](value);
-      if (ready)
-        make_dirty(component, i);
-    }
-    return ret;
-  }) : [];
-  $$.update();
-  ready = true;
-  run_all($$.before_update);
-  $$.fragment = create_fragment8 ? create_fragment8($$.ctx) : false;
-  if (options.target) {
-    if (options.hydrate) {
-      start_hydrating();
-      const nodes = children(options.target);
-      $$.fragment && $$.fragment.l(nodes);
-      nodes.forEach(detach);
-    } else {
-      $$.fragment && $$.fragment.c();
-    }
-    if (options.intro)
-      transition_in(component.$$.fragment);
-    mount_component(component, options.target, options.anchor, options.customElement);
-    end_hydrating();
-    flush();
-  }
-  set_current_component(parent_component);
-}
-var SvelteElement;
-if (typeof HTMLElement === "function") {
-  SvelteElement = class extends HTMLElement {
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-    }
-    connectedCallback() {
-      const { on_mount } = this.$$;
-      this.$$.on_disconnect = on_mount.map(run).filter(is_function);
-      for (const key in this.$$.slotted) {
-        this.appendChild(this.$$.slotted[key]);
-      }
-    }
-    attributeChangedCallback(attr2, _oldValue, newValue) {
-      this[attr2] = newValue;
-    }
-    disconnectedCallback() {
-      run_all(this.$$.on_disconnect);
-    }
-    $destroy() {
-      destroy_component(this, 1);
-      this.$destroy = noop;
-    }
-    $on(type, callback) {
-      const callbacks = this.$$.callbacks[type] || (this.$$.callbacks[type] = []);
-      callbacks.push(callback);
-      return () => {
-        const index = callbacks.indexOf(callback);
-        if (index !== -1)
-          callbacks.splice(index, 1);
-      };
-    }
-    $set($$props) {
-      if (this.$$set && !is_empty($$props)) {
-        this.$$.skip_bound = true;
-        this.$$set($$props);
-        this.$$.skip_bound = false;
-      }
-    }
-  };
-}
-var SvelteComponent = class {
-  $destroy() {
-    destroy_component(this, 1);
-    this.$destroy = noop;
-  }
-  $on(type, callback) {
-    const callbacks = this.$$.callbacks[type] || (this.$$.callbacks[type] = []);
-    callbacks.push(callback);
-    return () => {
-      const index = callbacks.indexOf(callback);
-      if (index !== -1)
-        callbacks.splice(index, 1);
-    };
-  }
-  $set($$props) {
-    if (this.$$set && !is_empty($$props)) {
-      this.$$.skip_bound = true;
-      this.$$set($$props);
-      this.$$.skip_bound = false;
-    }
-  }
-};
-
 // ../ui/src/lib/helpers/isBrowser.ts
 function getBrowser() {
   return "window" in globalThis;
@@ -2265,60 +2300,16 @@ function getBrowser() {
 var isBrowser = getBrowser();
 
 // ../ui/src/lib/helpers/createMessageStore.ts
-var import_shortid = __toModule(require_shortid());
-
-// ../../node_modules/.pnpm/svelte@3.44.2/node_modules/svelte/store/index.mjs
-var subscriber_queue = [];
-function writable(value, start = noop) {
-  let stop;
-  const subscribers = new Set();
-  function set(new_value) {
-    if (safe_not_equal(value, new_value)) {
-      value = new_value;
-      if (stop) {
-        const run_queue = !subscriber_queue.length;
-        for (const subscriber of subscribers) {
-          subscriber[1]();
-          subscriber_queue.push(subscriber, value);
-        }
-        if (run_queue) {
-          for (let i = 0; i < subscriber_queue.length; i += 2) {
-            subscriber_queue[i][0](subscriber_queue[i + 1]);
-          }
-          subscriber_queue.length = 0;
-        }
-      }
-    }
-  }
-  function update2(fn) {
-    set(fn(value));
-  }
-  function subscribe2(run2, invalidate = noop) {
-    const subscriber = [run2, invalidate];
-    subscribers.add(subscriber);
-    if (subscribers.size === 1) {
-      stop = start(set) || noop;
-    }
-    run2(value);
-    return () => {
-      subscribers.delete(subscriber);
-      if (subscribers.size === 0) {
-        stop();
-        stop = null;
-      }
-    };
-  }
-  return { set, update: update2, subscribe: subscribe2 };
-}
+var import_shortid = __toESM(require_shortid(), 1);
 
 // ../ui/src/lib/helpers/IMessage.ts
-var MessageType;
-(function(MessageType3) {
+var MessageType = /* @__PURE__ */ ((MessageType3) => {
   MessageType3["INFO"] = "info";
   MessageType3["WARNING"] = "warning";
   MessageType3["ERROR"] = "error";
   MessageType3["SUCCESS"] = "success";
-})(MessageType || (MessageType = {}));
+  return MessageType3;
+})(MessageType || {});
 
 // ../ui/src/lib/helpers/createMessageStore.ts
 var createMessageFactory = (store3) => (content, options = {}) => {
@@ -2327,7 +2318,7 @@ var createMessageFactory = (store3) => (content, options = {}) => {
   const hasValues = Array.isArray(options?.values);
   const message = {
     id: (0, import_shortid.default)(),
-    type: MessageType.INFO,
+    type: "info" /* INFO */,
     content,
     props: options.props,
     title: options?.title ?? options?.type,
@@ -2347,17 +2338,17 @@ var createMessageFactory = (store3) => (content, options = {}) => {
     });
   }
   if (content instanceof Error) {
-    message.type = MessageType.ERROR;
+    message.type = "error" /* ERROR */;
   }
   if (typeof message.timeout === "undefined") {
     let timeout;
-    if (message.type === MessageType.SUCCESS) {
+    if (message.type === "success" /* SUCCESS */) {
       timeout = 3e3;
     }
-    if (message.type === MessageType.INFO) {
+    if (message.type === "info" /* INFO */) {
       timeout = 2e3;
     }
-    if (message.type === MessageType.WARNING) {
+    if (message.type === "warning" /* WARNING */) {
       timeout = 7e3;
     }
     if (timeout && !hasValues) {
@@ -2386,7 +2377,7 @@ var { store: _store, createMessage, MessageType: MessageType2 } = createMessageS
 var { store: _store2, createMessage: createMessage2 } = createMessageStore_default();
 
 // ../ui/src/lib/InputCheckbox.svelte
-var import_shortid2 = __toModule(require_shortid());
+var import_shortid2 = __toESM(require_shortid(), 1);
 function create_fragment(ctx) {
   let div;
   let input;
@@ -2492,7 +2483,7 @@ function instance($$self, $$props, $$invalidate) {
   };
   return [value, id, input_change_handler];
 }
-var InputCheckbox = class extends SvelteComponent {
+var InputCheckbox = class extends SvelteComponent2 {
   constructor(options) {
     super();
     init(this, options, instance, create_fragment, safe_not_equal, { value: 0, id: 1 });
@@ -2501,7 +2492,7 @@ var InputCheckbox = class extends SvelteComponent {
 var InputCheckbox_default = InputCheckbox;
 
 // ../ui/src/lib/InputCurve.svelte
-var import_monotone_cubic_spline = __toModule(require_monotone_cubic_spline());
+var import_monotone_cubic_spline = __toESM(require_monotone_cubic_spline(), 1);
 function get_each_context(ctx, list, i) {
   const child_ctx = ctx.slice();
   child_ctx[19] = list[i];
@@ -2832,7 +2823,7 @@ function instance2($$self, $$props, $$invalidate) {
     mousedown_handler
   ];
 }
-var InputCurve = class extends SvelteComponent {
+var InputCurve = class extends SvelteComponent2 {
   constructor(options) {
     super();
     init(this, options, instance2, create_fragment2, safe_not_equal, { value: 9 });
@@ -3065,7 +3056,7 @@ function instance3($$self, $$props, $$invalidate) {
     click_handler_1
   ];
 }
-var InputInteger = class extends SvelteComponent {
+var InputInteger = class extends SvelteComponent2 {
   constructor(options) {
     super();
     init(this, options, instance3, create_fragment3, safe_not_equal, { min: 1, max: 2, step: 3, value: 0 });
@@ -3244,7 +3235,7 @@ function instance4($$self, $$props, $$invalidate) {
     input_binding
   ];
 }
-var InputFloat = class extends SvelteComponent {
+var InputFloat = class extends SvelteComponent2 {
   constructor(options) {
     super();
     init(this, options, instance4, create_fragment4, safe_not_equal, { value: 0, step: 1, min: 2, max: 3 });
@@ -3542,7 +3533,7 @@ function instance5($$self, $$props, $$invalidate) {
     div1_binding
   ];
 }
-var InputSelect = class extends SvelteComponent {
+var InputSelect = class extends SvelteComponent2 {
   constructor(options) {
     super();
     init(this, options, instance5, create_fragment5, safe_not_equal, {
@@ -3843,7 +3834,7 @@ function instance6($$self, $$props, $$invalidate) {
     mousedown_handler
   ];
 }
-var InputShape = class extends SvelteComponent {
+var InputShape = class extends SvelteComponent2 {
   constructor(options) {
     super();
     init(this, options, instance6, create_fragment6, safe_not_equal, { value: 8 });
@@ -4138,7 +4129,7 @@ function instance7($$self, $$props, $$invalidate) {
     click_handler
   ];
 }
-var InputSearch = class extends SvelteComponent {
+var InputSearch = class extends SvelteComponent2 {
   constructor(options) {
     super();
     init(this, options, instance7, create_fragment7, safe_not_equal, {
@@ -4668,10 +4659,6 @@ var Logger = class {
       this.output.error(message);
       this.output(...args);
     }
-  }
-  group(message) {
-    this.output.group(message);
-    this.isGrouped = true;
   }
   groupEnd() {
     console.groupEnd();
@@ -5617,7 +5604,7 @@ var NodeParser = class {
   }
   parseSystem(nodeData) {
     const { nodes } = nodeData;
-    const nodeStore = new Map();
+    const nodeStore = /* @__PURE__ */ new Map();
     const nodeInstances = nodes.map((props) => {
       const n = this.system.factory.create(props);
       n.enableUpdates = false;
@@ -5735,7 +5722,7 @@ var NodeSystem = class extends EventEmitter {
     this.options = { view, wrapper };
     try {
       this.log = new Logger(this, logLevel);
-      this.log.group(`Instantiated id:${this.id}`);
+      this.log.log(`Instantiated id:${this.id}`);
       this.store = new NodeTypeStore();
       this.factory = new NodeFactory(this);
       this.history = new NodeHistory(this);

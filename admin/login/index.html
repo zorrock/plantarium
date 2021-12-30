@@ -8,27 +8,26 @@
 
 		
 
-		<link rel="modulepreload" href="/admin/_app/start-6cdacd9c.js">
-		<link rel="modulepreload" href="/admin/_app/chunks/vendor-f14ba82b.js">
+		<link rel="stylesheet" href="/admin/_app/assets/start-808c0b29.css">
+		<link rel="stylesheet" href="/admin/_app/assets/vendor-d39a07c0.css">
+		<link rel="stylesheet" href="/admin/_app/assets/pages/__layout.svelte-44ead2aa.css">
+		<link rel="stylesheet" href="/admin/_app/assets/Section.svelte_svelte_type_style_lang-b7764e47.css">
+		<link rel="stylesheet" href="/admin/_app/assets/pages/login.svelte-77d3e793.css">
+		<link rel="modulepreload" href="/admin/_app/start-8f5e2c9c.js">
+		<link rel="modulepreload" href="/admin/_app/chunks/vendor-cf2a991e.js">
 		<link rel="modulepreload" href="/admin/_app/chunks/preload-helper-0be000dd.js">
 		<link rel="modulepreload" href="/admin/_app/chunks/paths-28a87002.js">
-		<link rel="modulepreload" href="/admin/_app/pages/__layout.svelte-e7f4e6b8.js">
-		<link rel="modulepreload" href="/admin/_app/chunks/Section.svelte_svelte_type_style_lang-36e5245e.js">
-		<link rel="modulepreload" href="/admin/_app/chunks/index-ff97ad8c.js">
-		<link rel="modulepreload" href="/admin/_app/pages/login.svelte-2906dd05.js">
-		<link rel="stylesheet" href="/admin/_app/assets/start-808c0b29.css">
-		<link rel="stylesheet" href="/admin/_app/assets/vendor-be251421.css">
-		<link rel="stylesheet" href="/admin/_app/assets/pages/__layout.svelte-d7061343.css">
-		<link rel="stylesheet" href="/admin/_app/assets/Section.svelte_svelte_type_style_lang-b7764e47.css">
-		<link rel="stylesheet" href="/admin/_app/assets/pages/login.svelte-846753f3.css">
+		<link rel="modulepreload" href="/admin/_app/pages/__layout.svelte-b39b3c63.js">
+		<link rel="modulepreload" href="/admin/_app/chunks/Section.svelte_svelte_type_style_lang-124fb4d6.js">
+		<link rel="modulepreload" href="/admin/_app/chunks/index-6611e336.js">
+		<link rel="modulepreload" href="/admin/_app/pages/login.svelte-903d5836.js">
 
 		<script type="module">
-			import { start } from "/admin/_app/start-6cdacd9c.js";
+			import { start } from "/admin/_app/start-8f5e2c9c.js";
 			start({
 				target: document.querySelector("#svelte"),
-				paths: {"base":"/admin","assets":""},
+				paths: {"base":"/admin","assets":"/admin"},
 				session: {},
-				host: location.host,
 				route: true,
 				spa: false,
 				trailing_slash: "never",
@@ -36,17 +35,17 @@
 					status: 200,
 					error: null,
 					nodes: [
-						import("/admin/_app/pages/__layout.svelte-e7f4e6b8.js"),
-						import("/admin/_app/pages/login.svelte-2906dd05.js")
+						import("/admin/_app/pages/__layout.svelte-b39b3c63.js"),
+						import("/admin/_app/pages/login.svelte-903d5836.js")
 					],
-					page: {
-						host: location.host, // TODO this is redundant
-						path: "\u002Flogin",
-						query: new URLSearchParams(""),
-						params: {}
-					}
+					url: new URL("sveltekit://prerender/login"),
+					params: {}
 				}
 			});
+		</script><script>
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('/service-worker.js');
+			}
 		</script>
   </head>
 
@@ -62,21 +61,18 @@
 
 <div class="container mx-auto"><div class="text-center my-6"><nav class="rounded bg-white shadow-xl w-auto inline-block p-2 mx-auto object-center"><a class="p-3 rounded" href="/admin/">Home
         </a><a class="p-3 rounded" href="/admin/reports">Reports
-        </a><a class="p-3 rounded underline" href="/admin/login">Login
+        </a><a class="p-3 rounded" href="/admin/login">Login
         </a></nav></div>
-  <div class="bg-white shadow-md my-10 rounded px-8 pt-6 pb-8 mb-4 flex flex-col mx-auto" style="width: 500px;"><form><label for="username" class="svelte-4fyya3">username</label>
-    <input class="mb-4 svelte-4fyya3" id="username" name="username" type="username" value="">
+  <div class="bg-white shadow-md my-10 rounded px-8 pt-6 pb-8 mb-4 flex flex-col mx-auto" style="width: 500px;"><form><label for="username" class="svelte-190qtc0">username</label>
+    <input class="mb-4 svelte-190qtc0" id="username" name="username" type="username" value="">
 
-    <label for="password" class="svelte-4fyya3">password</label>
-    <input class="mb-6 svelte-4fyya3" id="password" name="password" type="password" value="">
+    <label for="password" class="svelte-190qtc0">password</label>
+    <input class="mb-6 svelte-190qtc0" id="password" name="password" type="password" value="">
 
     <button class="bg-blue-400 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" type="submit">Submit</button></form>
 </div>
 </div>
 
-
-
-			
-		</div>
+</div>
   </body>
 </html>

@@ -8,26 +8,25 @@
 
 		
 
-		<link rel="modulepreload" href="/admin/_app/start-6cdacd9c.js">
-		<link rel="modulepreload" href="/admin/_app/chunks/vendor-f14ba82b.js">
+		<link rel="stylesheet" href="/admin/_app/assets/start-808c0b29.css">
+		<link rel="stylesheet" href="/admin/_app/assets/vendor-d39a07c0.css">
+		<link rel="stylesheet" href="/admin/_app/assets/pages/__layout.svelte-44ead2aa.css">
+		<link rel="stylesheet" href="/admin/_app/assets/Section.svelte_svelte_type_style_lang-b7764e47.css">
+		<link rel="modulepreload" href="/admin/_app/start-8f5e2c9c.js">
+		<link rel="modulepreload" href="/admin/_app/chunks/vendor-cf2a991e.js">
 		<link rel="modulepreload" href="/admin/_app/chunks/preload-helper-0be000dd.js">
 		<link rel="modulepreload" href="/admin/_app/chunks/paths-28a87002.js">
-		<link rel="modulepreload" href="/admin/_app/pages/__layout.svelte-e7f4e6b8.js">
-		<link rel="modulepreload" href="/admin/_app/chunks/Section.svelte_svelte_type_style_lang-36e5245e.js">
-		<link rel="modulepreload" href="/admin/_app/chunks/index-ff97ad8c.js">
-		<link rel="modulepreload" href="/admin/_app/pages/logout.svelte-e4d1062e.js">
-		<link rel="stylesheet" href="/admin/_app/assets/start-808c0b29.css">
-		<link rel="stylesheet" href="/admin/_app/assets/vendor-be251421.css">
-		<link rel="stylesheet" href="/admin/_app/assets/pages/__layout.svelte-d7061343.css">
-		<link rel="stylesheet" href="/admin/_app/assets/Section.svelte_svelte_type_style_lang-b7764e47.css">
+		<link rel="modulepreload" href="/admin/_app/pages/__layout.svelte-b39b3c63.js">
+		<link rel="modulepreload" href="/admin/_app/chunks/Section.svelte_svelte_type_style_lang-124fb4d6.js">
+		<link rel="modulepreload" href="/admin/_app/chunks/index-6611e336.js">
+		<link rel="modulepreload" href="/admin/_app/pages/logout.svelte-2fbf60ac.js">
 
 		<script type="module">
-			import { start } from "/admin/_app/start-6cdacd9c.js";
+			import { start } from "/admin/_app/start-8f5e2c9c.js";
 			start({
 				target: document.querySelector("#svelte"),
-				paths: {"base":"/admin","assets":""},
+				paths: {"base":"/admin","assets":"/admin"},
 				session: {},
-				host: location.host,
 				route: true,
 				spa: false,
 				trailing_slash: "never",
@@ -35,17 +34,17 @@
 					status: 200,
 					error: null,
 					nodes: [
-						import("/admin/_app/pages/__layout.svelte-e7f4e6b8.js"),
-						import("/admin/_app/pages/logout.svelte-e4d1062e.js")
+						import("/admin/_app/pages/__layout.svelte-b39b3c63.js"),
+						import("/admin/_app/pages/logout.svelte-2fbf60ac.js")
 					],
-					page: {
-						host: location.host, // TODO this is redundant
-						path: "\u002Flogout",
-						query: new URLSearchParams(""),
-						params: {}
-					}
+					url: new URL("sveltekit://prerender/logout"),
+					params: {}
 				}
 			});
+		</script><script>
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('/service-worker.js');
+			}
 		</script>
   </head>
 
@@ -66,9 +65,6 @@
   <button>logout</button>
 </div>
 
-
-
-			
-		</div>
+</div>
   </body>
 </html>

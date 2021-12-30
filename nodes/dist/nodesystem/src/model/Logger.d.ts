@@ -17,7 +17,6 @@ export default class Logger {
     log(message: string | unknown, ...args: unknown[]): void;
     warn(message: string | unknown, ...args: unknown[]): void;
     error(message: Error, ...args: unknown[]): void;
-    group(message: string): void;
     groupEnd(): void;
 }
 export {};

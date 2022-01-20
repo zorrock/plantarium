@@ -2963,6 +2963,9 @@ function instance3($$self, $$props, $$invalidate) {
   let { max = Infinity } = $$props;
   let { step = 1 } = $$props;
   let { value = 0 } = $$props;
+  if (!value) {
+    value = 0;
+  }
   let inputEl;
   function handleChange(change) {
     $$invalidate(0, value = Math.max(min, Math.min(+value + change, max)));
@@ -3061,6 +3064,34 @@ var InputInteger = class extends SvelteComponent2 {
     super();
     init(this, options, instance3, create_fragment3, safe_not_equal, { min: 1, max: 2, step: 3, value: 0 });
   }
+  get min() {
+    return this.$$.ctx[1];
+  }
+  set min(min) {
+    this.$$set({ min });
+    flush();
+  }
+  get max() {
+    return this.$$.ctx[2];
+  }
+  set max(max) {
+    this.$$set({ max });
+    flush();
+  }
+  get step() {
+    return this.$$.ctx[3];
+  }
+  set step(step) {
+    this.$$set({ step });
+    flush();
+  }
+  get value() {
+    return this.$$.ctx[0];
+  }
+  set value(value) {
+    this.$$set({ value });
+    flush();
+  }
 };
 var InputInteger_default = InputInteger;
 
@@ -3081,10 +3112,10 @@ function create_fragment4(ctx) {
       t = space();
       input = element("input");
       attr(span, "class", "overlay svelte-2vvjq7");
-      attr(span, "style", span_style_value = `width: ${(ctx[0] - ctx[2]) / (ctx[3] - ctx[2]) * 100}%`);
-      attr(input, "step", ctx[1]);
-      attr(input, "max", ctx[3]);
-      attr(input, "min", ctx[2]);
+      attr(span, "style", span_style_value = `width: ${(ctx[0] - ctx[1]) / (ctx[2] - ctx[1]) * 100}%`);
+      attr(input, "step", ctx[3]);
+      attr(input, "max", ctx[2]);
+      attr(input, "min", ctx[1]);
       attr(input, "type", "number");
       attr(input, "style", input_style_value = `width:${ctx[6]};`);
       attr(input, "class", "svelte-2vvjq7");
@@ -3108,17 +3139,17 @@ function create_fragment4(ctx) {
       }
     },
     p(ctx2, [dirty]) {
-      if (dirty & 13 && span_style_value !== (span_style_value = `width: ${(ctx2[0] - ctx2[2]) / (ctx2[3] - ctx2[2]) * 100}%`)) {
+      if (dirty & 7 && span_style_value !== (span_style_value = `width: ${(ctx2[0] - ctx2[1]) / (ctx2[2] - ctx2[1]) * 100}%`)) {
         attr(span, "style", span_style_value);
       }
-      if (dirty & 2) {
-        attr(input, "step", ctx2[1]);
-      }
       if (dirty & 8) {
-        attr(input, "max", ctx2[3]);
+        attr(input, "step", ctx2[3]);
       }
       if (dirty & 4) {
-        attr(input, "min", ctx2[2]);
+        attr(input, "max", ctx2[2]);
+      }
+      if (dirty & 2) {
+        attr(input, "min", ctx2[1]);
       }
       if (dirty & 64 && input_style_value !== (input_style_value = `width:${ctx2[6]};`)) {
         attr(input, "style", input_style_value);
@@ -3176,6 +3207,12 @@ function instance4($$self, $$props, $$invalidate) {
     if (downV === value) {
       inputEl.focus();
     }
+    if (value < min) {
+      $$invalidate(1, min = value);
+    }
+    if (value > max) {
+      $$invalidate(2, max = value);
+    }
     document.body.style.cursor = "unset";
     window.removeEventListener("mouseup", handleMouseUp);
     window.removeEventListener("mousemove", handleMouseMove);
@@ -3183,7 +3220,14 @@ function instance4($$self, $$props, $$invalidate) {
   function handleMouseMove(ev) {
     vx = (ev.clientX - rect.left) / rect.width;
     vy = ev.clientY - downY;
-    $$invalidate(0, value = Math.max(Math.min(min + (max - min) * vx, max), min));
+    if (ev.ctrlKey) {
+      let v = min + (max - min) * vx;
+      $$invalidate(0, value = v);
+    } else {
+      $$invalidate(1, min = 0);
+      $$invalidate(2, max = 1);
+      $$invalidate(0, value = Math.max(Math.min(min + (max - min) * vx, max), min));
+    }
   }
   function input_input_handler() {
     value = to_number(this.value);
@@ -3199,17 +3243,17 @@ function instance4($$self, $$props, $$invalidate) {
     if ("value" in $$props2)
       $$invalidate(0, value = $$props2.value);
     if ("step" in $$props2)
-      $$invalidate(1, step = $$props2.step);
+      $$invalidate(3, step = $$props2.step);
     if ("min" in $$props2)
-      $$invalidate(2, min = $$props2.min);
+      $$invalidate(1, min = $$props2.min);
     if ("max" in $$props2)
-      $$invalidate(3, max = $$props2.max);
+      $$invalidate(2, max = $$props2.max);
   };
   $$self.$$.update = () => {
     if ($$self.$$.dirty & 1) {
       $:
-        if (value.toString().length > 5) {
-          $$invalidate(0, value = strip(value));
+        if ((value || 0).toString().length > 5) {
+          $$invalidate(0, value = strip(value || 0));
         }
     }
     if ($$self.$$.dirty & 1) {
@@ -3223,9 +3267,9 @@ function instance4($$self, $$props, $$invalidate) {
   };
   return [
     value,
-    step,
     min,
     max,
+    step,
     inputEl,
     isMouseDown,
     width,
@@ -3238,7 +3282,7 @@ function instance4($$self, $$props, $$invalidate) {
 var InputFloat = class extends SvelteComponent2 {
   constructor(options) {
     super();
-    init(this, options, instance4, create_fragment4, safe_not_equal, { value: 0, step: 1, min: 2, max: 3 });
+    init(this, options, instance4, create_fragment4, safe_not_equal, { value: 0, step: 3, min: 1, max: 2 });
   }
 };
 var InputFloat_default = InputFloat;

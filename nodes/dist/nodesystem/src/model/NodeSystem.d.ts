@@ -1,6 +1,5 @@
 import { EventEmitter } from '@plantarium/helpers';
 import NodeSystemView from '../view/NodeSystemView';
-import Logger from './Logger';
 import type Node from './Node';
 import NodeFactory from './NodeFactory';
 import NodeHistory from './NodeHistory';
@@ -20,7 +19,6 @@ export default class NodeSystem extends EventEmitter {
     outputNode: Node;
     factory: NodeFactory;
     store: NodeTypeStore;
-    log: Logger;
     history: NodeHistory;
     isLoaded: boolean;
     isPaused: boolean;

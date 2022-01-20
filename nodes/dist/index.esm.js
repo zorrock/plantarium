@@ -46,10 +46,6 @@ var __decorateClass = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-var __publicField = (obj, key, value) => {
-  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-  return value;
-};
 
 // ../../node_modules/.pnpm/file-saver@2.0.5/node_modules/file-saver/dist/FileSaver.min.js
 var require_FileSaver_min = __commonJS({
@@ -517,36 +513,6 @@ var aggregate_default = (baseClass, ...mixins) => {
   return base;
 };
 
-// ../helpers/src/composeableError.ts
-var _ComposableError = class extends Error {
-  detail;
-  meta;
-  constructor(message, meta = {}) {
-    super(message);
-    this.detail = message;
-    this.meta = meta;
-  }
-  static fromParent(parentError, code, message, meta) {
-    return new _ComposableError(message, Object.assign({ cause: parentError }, meta));
-  }
-  getCause() {
-    return this.meta.cause || void 0;
-  }
-  unwrapChain(err = this) {
-    return _ComposableError.unwrapChain(err);
-  }
-};
-var ComposableError = _ComposableError;
-__publicField(ComposableError, "unwrapChain", (err) => {
-  const chain = [err];
-  let nextError = err.getCause();
-  while (nextError) {
-    chain.push(nextError);
-    nextError = nextError.getCause();
-  }
-  return chain;
-});
-
 // ../helpers/src/debounceDecorator.ts
 function Debounce(wait, immediate = false) {
   return function(target, propertyKey, descriptor) {
@@ -705,14 +671,14 @@ var genId_default = () => {
   return genID;
 };
 
-// ../../node_modules/.pnpm/svelte@3.44.3/node_modules/svelte/internal/index.mjs
+// ../../node_modules/.pnpm/svelte@3.46.2/node_modules/svelte/internal/index.mjs
 function noop() {
 }
 function run(fn) {
   return fn();
 }
 function blank_object() {
-  return Object.create(null);
+  return /* @__PURE__ */ Object.create(null);
 }
 function run_all(fns) {
   fns.forEach(run);
@@ -788,7 +754,11 @@ function set_input_value(input, value) {
   input.value = value == null ? "" : value;
 }
 function set_style(node2, key, value, important) {
-  node2.style.setProperty(key, value, important ? "important" : "");
+  if (value === null) {
+    node2.style.removeProperty(key);
+  } else {
+    node2.style.setProperty(key, value, important ? "important" : "");
+  }
 }
 function toggle_class(element2, name, toggle) {
   element2.classList[toggle ? "add" : "remove"](name);
@@ -1036,7 +1006,7 @@ var SvelteComponent2 = class {
   }
 };
 
-// ../../node_modules/.pnpm/svelte@3.44.3/node_modules/svelte/store/index.mjs
+// ../../node_modules/.pnpm/svelte@3.46.2/node_modules/svelte/store/index.mjs
 var subscriber_queue = [];
 function writable(value, start = noop) {
   let stop;
@@ -1168,10 +1138,10 @@ function log(scope) {
       }
     }
   };
-  const log3 = (...args) => handleLog(args, 0);
-  log3.warn = (...args) => handleLog(args, 1);
-  log3.error = (err) => handleLog(err, 2);
-  return log3;
+  const log6 = (...args) => handleLog(args, 0);
+  log6.warn = (...args) => handleLog(args, 1);
+  log6.error = (err) => handleLog(err, 2);
+  return log6;
 }
 log.getStore = function() {
   if (store2)
@@ -4658,58 +4628,6 @@ var types = {
 };
 var nodes_default = types;
 
-// src/model/Logger.ts
-var longestModuleName = 0;
-var Logger = class {
-  constructor(module, logLevel = "system" in module ? module.system.log.level : 2) {
-    this.isGrouped = false;
-    this.output = logger_default("logger");
-    this.module = module;
-    this.name = module.constructor.name;
-    this.length = this.name.length;
-    longestModuleName = Math.max(longestModuleName, this.length);
-    this.level = logLevel;
-    this.output = logger_default(this.getModuleName());
-  }
-  getModuleName() {
-    return this.isGrouped ? "" : `${this.name.padEnd(longestModuleName, " ")}`;
-  }
-  handle(func, message, args) {
-    if (args && args.length) {
-      console.groupCollapsed(`${this.getModuleName()} ${message}`);
-      func(...args);
-      console.groupEnd();
-    } else {
-      func(`${this.getModuleName()} ${message}`);
-    }
-  }
-  info(message, ...args) {
-    if (this.level >= 3) {
-      this.output(message, ...args);
-    }
-  }
-  log(message, ...args) {
-    if (this.level >= 2) {
-      this.output(message, ...args);
-    }
-  }
-  warn(message, ...args) {
-    if (this.level >= 1) {
-      this.output.warn(message, ...args);
-    }
-  }
-  error(message, ...args) {
-    if (this.level >= 0) {
-      this.output.error(message);
-      this.output(...args);
-    }
-  }
-  groupEnd() {
-    console.groupEnd();
-    this.isGrouped = false;
-  }
-};
-
 // src/view/AddMenu.ts
 var RightClickMenu = class {
   constructor(view) {
@@ -4717,7 +4635,6 @@ var RightClickMenu = class {
     this.y = 0;
     this.view = view;
     this.system = view.system;
-    this.log = new Logger(this);
     this.wrapper = document.createElement("div");
     this.wrapper.classList.add("context-wrapper");
     this.searchEl = new InputSearch_default({ target: this.wrapper });
@@ -5517,16 +5434,16 @@ var NodeSystemView = class extends EventEmitter {
 };
 
 // src/model/NodeFactory.ts
+var log2 = logger_default("NodeFactory");
 var NodeFactory = class {
   constructor(system) {
     this.id = genId_default();
     this.system = system;
-    this.log = new Logger(this);
-    this.log.info(`Initialized`);
+    log2(`Initialized`);
   }
   reset() {
     this.id.reset();
-    this.log.info("Reset id generator");
+    log2("Reset id generator");
   }
   create(props) {
     const { attributes } = props;
@@ -5541,20 +5458,19 @@ var NodeFactory = class {
     if (name === "output") {
       this.system.setOutputNode(node2);
     }
-    this.log.info(`Created node with type ${attributes.type}`, props);
+    log2(`Created node with type ${attributes.type}`, props);
     return node2;
   }
 };
 
 // src/model/NodeHistory.ts
+var log3 = logger_default("NodeHistory");
 var NodeHistory = class {
   constructor(system) {
     this.system = system;
     this.history = [];
     this.historyIndex = -1;
     this.isApplyingChanges = false;
-    this.log = new Logger(this);
-    this.log.info(`Instantiated`);
     this.addAction = (() => {
       let int;
       const f = () => {
@@ -5569,14 +5485,15 @@ var NodeHistory = class {
         }
         int = setTimeout(() => {
           this._addAction();
-          int = false;
+          int = void 0;
         }, 200);
       };
       return f;
     })().bind(this);
+    log3(`Initialized`);
   }
   _addAction() {
-    this.log.info("Register History Step");
+    log3("Register History Step");
     if (this.isApplyingChanges)
       return;
     if (this.historyIndex !== this.history.length - 1) {
@@ -5610,7 +5527,7 @@ var NodeHistory = class {
       return;
     this.isApplyingChanges = true;
     if (this.historyIndex < 0) {
-      this.log.info("Reached beginning of Stack");
+      log3("Reached beginning of Stack");
       this.isApplyingChanges = false;
       return;
     }
@@ -5627,7 +5544,7 @@ var NodeHistory = class {
       return;
     this.isApplyingChanges = true;
     if (this.historyIndex >= this.history.length - 1) {
-      this.log.info("Reached end of Stack");
+      log3("Reached end of Stack");
       this.isApplyingChanges = false;
       return;
     }
@@ -5718,7 +5635,7 @@ var NodeParser = class {
 };
 
 // src/model/NodeTypeStore.ts
-var log2 = logger_default("NodeTypeStore");
+var log4 = logger_default("NodeTypeStore");
 var NodeTypeStore = class extends EventEmitter {
   constructor() {
     super();
@@ -5726,7 +5643,7 @@ var NodeTypeStore = class extends EventEmitter {
     this.typeMap = {};
   }
   add(type) {
-    log2("register new type " + type.title, type);
+    log4("register new type " + type.title, type);
     this.types = [
       ...this.types.filter((t) => t.title.toLowerCase() !== type.title.toLowerCase()),
       type
@@ -5746,6 +5663,7 @@ var NodeTypeStore = class extends EventEmitter {
 
 // src/model/NodeSystem.ts
 var systemID = 0;
+var log5 = logger_default("NodeSystem");
 var NodeSystem = class extends EventEmitter {
   constructor(options = {}) {
     super();
@@ -5760,13 +5678,11 @@ var NodeSystem = class extends EventEmitter {
       view = false,
       wrapper,
       defaultNodes = false,
-      registerNodes = false,
-      logLevel = 5
+      registerNodes = false
     } = options;
     this.options = { view, wrapper };
     try {
-      this.log = new Logger(this, logLevel);
-      this.log.log(`Instantiated id:${this.id}`);
+      log5(`Instantiated id:${this.id}`);
       this.store = new NodeTypeStore();
       this.factory = new NodeFactory(this);
       this.history = new NodeHistory(this);
@@ -5789,7 +5705,6 @@ var NodeSystem = class extends EventEmitter {
       if (registerNodes && registerNodes.length) {
         registerNodes.forEach(this.registerNodeType.bind(this));
       }
-      this.log.groupEnd();
     } catch (error) {
       this.emit("error", { type: "init", error });
     }
@@ -5819,7 +5734,7 @@ var NodeSystem = class extends EventEmitter {
       this.meta = systemData.meta || { lastSaved: 0 };
       this.meta.lastSaved = Date.now();
       (_a = this == null ? void 0 : this.view) == null ? void 0 : _a.setTransform(this.meta.transform);
-      this.log.info(`Loaded NodeSystemData with ${nodes.length} Nodes`, systemData);
+      log5(`Loaded NodeSystemData with ${nodes.length} Nodes`, systemData);
       if ("history" in systemData) {
         this.history.deserialize(systemData.history);
       }
@@ -5840,7 +5755,7 @@ var NodeSystem = class extends EventEmitter {
   save() {
     if (this.isLoaded) {
       this.meta.lastSaved = Date.now();
-      this.log.info("save system", this.serialize());
+      log5("save system", this.serialize());
       this.emit("save", this.serialize());
     }
   }
@@ -5868,7 +5783,7 @@ var NodeSystem = class extends EventEmitter {
     node2.getInputs().forEach((i) => i.remove());
     this.nodes = this.nodes.filter((n) => n !== node2);
     this.save();
-    this.log.info(`Removed Node id:${node2.id} type:${node2.attributes.type}`, node2.deserialize());
+    log5(`Removed Node id:${node2.id} type:${node2.attributes.type}`, node2.deserialize());
   }
   spliceNode(node2) {
     const leftSockets = node2.getInputs().map((i) => {
@@ -5907,7 +5822,7 @@ var NodeSystem = class extends EventEmitter {
     const node2 = this.factory.create(props);
     this.addNode(node2);
     this.save();
-    this.log.info(`Created new node id:${props.attributes.id} type:${props.attributes.type}`, props);
+    log5(`Created new node id:${props.attributes.id} type:${props.attributes.type}`, props);
     return node2;
   }
   getNodes() {
@@ -5926,7 +5841,6 @@ var NodeSystem = class extends EventEmitter {
       const _type = this.parser.parseType(type);
       this.store.add(_type);
     }
-    this.log.info(`Registered new nodeType type:${type.title}`, type);
   }
 };
 __decorateClass([

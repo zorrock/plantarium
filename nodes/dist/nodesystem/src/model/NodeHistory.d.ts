@@ -1,4 +1,3 @@
-import Logger from './Logger';
 import type NodeSystem from './NodeSystem';
 export default class NodeHistory {
     private system;
@@ -8,7 +7,6 @@ export default class NodeHistory {
     }[];
     historyIndex: number;
     isApplyingChanges: boolean;
-    log: Logger;
     addAction: NodeHistory['_addAction'];
     prevState: NodeProps[];
     constructor(system: NodeSystem);

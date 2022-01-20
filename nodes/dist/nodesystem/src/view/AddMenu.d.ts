@@ -4,7 +4,6 @@ import type NodeInput from '../model/NodeInput';
 import type NodeOutput from '../model/NodeOutput';
 import type NodeType from '../model/NodeType';
 import type NodeSystem from '../model/NodeSystem';
-import Logger from '../model/Logger';
 import { InputSearch } from '@plantarium/ui/src/lib';
 interface ContextOptions {
     x: number;
@@ -18,7 +17,6 @@ export default class RightClickMenu {
     system: NodeSystem;
     x: number;
     y: number;
-    log: Logger;
     socket: NodeInput | NodeOutput | undefined;
     types: NodeType[];
     res: (data: NodeProps) => void;

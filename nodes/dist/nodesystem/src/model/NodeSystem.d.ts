@@ -6,12 +6,13 @@ import NodeHistory from './NodeHistory';
 import type NodeType from './NodeType';
 import NodeTypeStore from './NodeTypeStore';
 interface NodeSystemOptions {
-    view?: boolean;
-    wrapper?: HTMLElement;
-    defaultNodes?: string[] | boolean;
-    registerNodes?: NodeTypeData[];
-    logLevel?: number;
-    parent?: HTMLElement;
+    view: boolean;
+    wrapper: HTMLElement;
+    defaultNodes: string[] | boolean;
+    registerNodes: NodeTypeData[];
+    logLevel: number;
+    parent: HTMLElement;
+    showUpdates: boolean;
 }
 export default class NodeSystem extends EventEmitter {
     private parser;
@@ -27,8 +28,8 @@ export default class NodeSystem extends EventEmitter {
     states: NodeSystemData[];
     id: number;
     view: NodeSystemView;
-    options: NodeSystemOptions;
-    constructor(options?: NodeSystemOptions);
+    options: Partial<NodeSystemOptions>;
+    constructor(options?: Partial<NodeSystemOptions>);
     get result(): unknown;
     set result(res: unknown);
     setMetaData(data: Partial<NodeSystemMeta>): void;

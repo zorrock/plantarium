@@ -33,6 +33,7 @@ export default class NodeView {
     get state(): string | undefined;
     handleMouseDown(ev: MouseEvent): void;
     handleMouseUp(): void;
+    showUpdate(): void;
     handleMouseMove({ mx: _x, my: _y, keys }: {
         mx: any;
         my: any;

@@ -2129,6 +2129,9 @@ var Node = class extends EventEmitter {
   update() {
     if (!this.enableUpdates)
       return;
+    if (this.system.options.showUpdates && this.view) {
+      this.view.showUpdate();
+    }
     this.computedData = this._compute(this.state);
     this.emit("computedData", this.computedData);
     this.refs.forEach((ref) => {
@@ -2373,26 +2376,26 @@ function create_fragment(ctx) {
       line1 = svg_element("line");
       attr(input, "type", "checkbox");
       attr(input, "id", ctx[1]);
-      attr(input, "class", "svelte-ohv39p");
-      attr(title, "class", "svelte-ohv39p");
+      attr(input, "class", "svelte-xm0fhp");
+      attr(title, "class", "svelte-xm0fhp");
       attr(line0, "vector-effect", "non-scaling-stroke");
       attr(line0, "x1", "0");
       attr(line0, "y1", "100");
       attr(line0, "x2", "100");
       attr(line0, "y2", "0");
-      attr(line0, "class", "svelte-ohv39p");
+      attr(line0, "class", "svelte-xm0fhp");
       attr(line1, "vector-effect", "non-scaling-stroke");
       attr(line1, "x1", "0");
       attr(line1, "y1", "0");
       attr(line1, "x2", "100");
       attr(line1, "y2", "100");
-      attr(line1, "class", "svelte-ohv39p");
+      attr(line1, "class", "svelte-xm0fhp");
       attr(svg, "xmlns", "http://www.w3.org/2000/svg");
       attr(svg, "viewBox", "0 0 100 100");
-      attr(svg, "class", "svelte-ohv39p");
-      attr(label, "class", "checkbox-label svelte-ohv39p");
+      attr(svg, "class", "svelte-xm0fhp");
+      attr(label, "class", "checkbox-label svelte-xm0fhp");
       attr(label, "for", ctx[1]);
-      attr(div, "class", "component-wrapper svelte-ohv39p");
+      attr(div, "class", "component-wrapper svelte-xm0fhp");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -2489,7 +2492,7 @@ function create_each_block_1(ctx) {
       attr(circle, "cx", circle_cx_value = ctx[19].x * 100);
       attr(circle, "cy", circle_cy_value = ctx[19].y * 100);
       attr(circle, "r", "2");
-      attr(circle, "class", "svelte-tsaxx5");
+      attr(circle, "class", "svelte-qz1eft");
       toggle_class(circle, "pinned", ctx[19].pinned);
     },
     m(target, anchor) {
@@ -2532,7 +2535,7 @@ function create_if_block(ctx) {
       attr(line, "y1", line_y__value = ctx[3][ctx[21] - 1].y * 100);
       attr(line, "x2", line_x__value_1 = ctx[19].x * 100);
       attr(line, "y2", line_y__value_1 = ctx[19].y * 100);
-      attr(line, "class", "svelte-tsaxx5");
+      attr(line, "class", "svelte-qz1eft");
     },
     m(target, anchor) {
       insert(target, line, anchor);
@@ -2557,7 +2560,7 @@ function create_each_block(ctx) {
       attr(circle, "cx", circle_cx_value = ctx[19].x * 100);
       attr(circle, "cy", circle_cy_value = ctx[19].y * 100);
       attr(circle, "r", "1");
-      attr(circle, "class", "svelte-tsaxx5");
+      attr(circle, "class", "svelte-qz1eft");
       toggle_class(circle, "pinned", ctx[19].pinned);
     },
     m(target, anchor) {
@@ -2609,14 +2612,14 @@ function create_fragment2(ctx) {
       attr(path_1, "d", ctx[2]);
       attr(path_1, "fill", "none");
       attr(path_1, "stroke", "grey");
-      attr(path_1, "class", "svelte-tsaxx5");
+      attr(path_1, "class", "svelte-qz1eft");
       attr(g, "id", "debug");
-      attr(g, "class", "svelte-tsaxx5");
+      attr(g, "class", "svelte-qz1eft");
       attr(svg, "viewBox", "0 0 100 100");
       attr(svg, "width", "100");
       attr(svg, "height", "100");
-      attr(svg, "class", "svelte-tsaxx5");
-      attr(div, "class", "component-wrapper svelte-tsaxx5");
+      attr(svg, "class", "svelte-qz1eft");
+      attr(div, "class", "component-wrapper svelte-qz1eft");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -2808,7 +2811,7 @@ function create_if_block2(ctx) {
   return {
     c() {
       span = element("span");
-      attr(span, "class", "overlay svelte-3lnuwn");
+      attr(span, "class", "overlay svelte-jold4n");
       attr(span, "style", span_style_value = `width: ${(ctx[0] - ctx[1]) / (ctx[2] - ctx[1]) * 100}%`);
     },
     m(target, anchor) {
@@ -2850,15 +2853,15 @@ function create_fragment3(ctx) {
       t3 = space();
       button1 = element("button");
       button1.textContent = "+";
-      attr(button0, "class", "svelte-3lnuwn");
+      attr(button0, "class", "svelte-jold4n");
       attr(input, "step", ctx[3]);
       attr(input, "max", ctx[2]);
       attr(input, "min", ctx[1]);
       attr(input, "type", "number");
       attr(input, "style", input_style_value = `width:${ctx[5]};`);
-      attr(input, "class", "svelte-3lnuwn");
-      attr(button1, "class", "svelte-3lnuwn");
-      attr(div, "class", "component-wrapper svelte-3lnuwn");
+      attr(input, "class", "svelte-jold4n");
+      attr(button1, "class", "svelte-jold4n");
+      attr(div, "class", "component-wrapper svelte-jold4n");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -3081,15 +3084,15 @@ function create_fragment4(ctx) {
       span = element("span");
       t = space();
       input = element("input");
-      attr(span, "class", "overlay svelte-2vvjq7");
+      attr(span, "class", "overlay svelte-glh0u7");
       attr(span, "style", span_style_value = `width: ${(ctx[0] - ctx[1]) / (ctx[2] - ctx[1]) * 100}%`);
       attr(input, "step", ctx[3]);
       attr(input, "max", ctx[2]);
       attr(input, "min", ctx[1]);
       attr(input, "type", "number");
       attr(input, "style", input_style_value = `width:${ctx[6]};`);
-      attr(input, "class", "svelte-2vvjq7");
-      attr(div, "class", "component-wrapper svelte-2vvjq7");
+      attr(input, "class", "svelte-glh0u7");
+      attr(div, "class", "component-wrapper svelte-glh0u7");
       toggle_class(div, "is-down", ctx[5]);
     },
     m(target, anchor) {
@@ -3272,7 +3275,7 @@ function create_else_block(ctx) {
       div = element("div");
       div.textContent = "none";
       attr(div, "id", "selected-value");
-      attr(div, "class", "svelte-1ywe9t");
+      attr(div, "class", "svelte-o9z7b5");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -3300,7 +3303,7 @@ function create_if_block_1(ctx) {
       div = element("div");
       t = text(ctx[0]);
       attr(div, "id", "selected-value");
-      attr(div, "class", "svelte-1ywe9t");
+      attr(div, "class", "svelte-o9z7b5");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -3339,7 +3342,7 @@ function create_if_block3(ctx) {
       t0 = text(t0_value);
       t1 = space();
       attr(p, "style", p_style_value = `opacity: ${ctx[11] === ctx[0] ? 0.5 : 1}`);
-      attr(p, "class", "item svelte-1ywe9t");
+      attr(p, "class", "item svelte-o9z7b5");
     },
     m(target, anchor) {
       insert(target, p, anchor);
@@ -3430,10 +3433,10 @@ function create_fragment5(ctx) {
         each_blocks[i].c();
       }
       attr(div0, "id", "item-wrapper");
-      attr(div0, "class", "svelte-1ywe9t");
+      attr(div0, "class", "svelte-o9z7b5");
       attr(div1, "id", "main");
-      attr(div1, "class", "svelte-1ywe9t");
-      attr(div2, "class", "component-wrapper svelte-1ywe9t");
+      attr(div1, "class", "svelte-o9z7b5");
+      attr(div2, "class", "component-wrapper svelte-o9z7b5");
       toggle_class(div2, "open", ctx[2]);
     },
     m(target, anchor) {
@@ -3587,7 +3590,7 @@ function create_each_block3(ctx) {
       attr(circle, "cx", circle_cx_value = ctx[19].x * 100);
       attr(circle, "cy", circle_cy_value = ctx[19].y * 200 - 50);
       attr(circle, "r", "4");
-      attr(circle, "class", "svelte-vrnf7c");
+      attr(circle, "class", "svelte-l4p352");
       toggle_class(circle, "pinned", ctx[19].pinned);
     },
     m(target, anchor) {
@@ -3653,36 +3656,36 @@ function create_fragment6(ctx) {
       attr(path0, "d", ctx[2]);
       attr(path0, "fill", "none");
       attr(path0, "stroke", "#65E2A0");
-      attr(path0, "class", "svelte-vrnf7c");
+      attr(path0, "class", "svelte-l4p352");
       attr(svg0, "viewBox", "0 0 100 100");
       attr(svg0, "width", "50");
       attr(svg0, "height", "100");
-      attr(svg0, "class", "svelte-vrnf7c");
+      attr(svg0, "class", "svelte-l4p352");
       attr(stop0, "offset", "0%");
       set_style(stop0, "stop-color", "#65E2A0");
       set_style(stop0, "stop-opacity", "1");
-      attr(stop0, "class", "svelte-vrnf7c");
+      attr(stop0, "class", "svelte-l4p352");
       attr(stop1, "offset", "100%");
       set_style(stop1, "stop-color", "#469C6E");
       set_style(stop1, "stop-opacity", "1");
-      attr(stop1, "class", "svelte-vrnf7c");
+      attr(stop1, "class", "svelte-l4p352");
       attr(linearGradient, "id", "grad1");
       attr(linearGradient, "x1", "0%");
       attr(linearGradient, "y1", "0%");
       attr(linearGradient, "x2", "100%");
       attr(linearGradient, "y2", "0%");
-      attr(linearGradient, "class", "svelte-vrnf7c");
-      attr(defs, "class", "svelte-vrnf7c");
+      attr(linearGradient, "class", "svelte-l4p352");
+      attr(defs, "class", "svelte-l4p352");
       attr(path1, "d", ctx[2]);
       attr(path1, "fill", "url(#grad1)");
       attr(path1, "stroke", "grey");
-      attr(path1, "class", "svelte-vrnf7c");
+      attr(path1, "class", "svelte-l4p352");
       attr(svg1, "id", "right");
       attr(svg1, "viewBox", "0 0 100 100");
       attr(svg1, "width", "50");
       attr(svg1, "height", "100");
-      attr(svg1, "class", "svelte-vrnf7c");
-      attr(div, "class", "component-wrapper svelte-vrnf7c");
+      attr(svg1, "class", "svelte-l4p352");
+      attr(div, "class", "component-wrapper svelte-l4p352");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -3884,7 +3887,7 @@ function create_if_block4(ctx) {
       div = element("div");
       t0 = text(t0_value);
       t1 = space();
-      attr(div, "class", "search-entry svelte-779fwr");
+      attr(div, "class", "search-entry svelte-usd9s7");
       toggle_class(div, "focused", ctx[21].value === ctx[3]);
     },
     m(target, anchor) {
@@ -3973,8 +3976,8 @@ function create_fragment7(ctx) {
       }
       attr(input, "type", "text");
       attr(input, "placeholder", "Search");
-      attr(input, "class", "svelte-779fwr");
-      attr(div, "class", "search-wrapper svelte-779fwr");
+      attr(input, "class", "svelte-usd9s7");
+      attr(div, "class", "search-wrapper svelte-usd9s7");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -4503,6 +4506,12 @@ var NodeView = class {
       this.hoveredConnection.connection.joinNode(this.node);
       delete this.hoveredConnection;
     }
+  }
+  showUpdate() {
+    this.wrapper.classList.add("is-updating");
+    setTimeout(() => {
+      this.wrapper.classList.remove("is-updating");
+    }, 200);
   }
   handleMouseMove({ mx: _x, my: _y, keys }) {
     if (this.active) {
@@ -5678,9 +5687,10 @@ var NodeSystem = class extends EventEmitter {
       view = false,
       wrapper,
       defaultNodes = false,
-      registerNodes = false
+      registerNodes = false,
+      showUpdates = false
     } = options;
-    this.options = { view, wrapper };
+    this.options = { view, wrapper, showUpdates };
     try {
       log5(`Instantiated id:${this.id}`);
       this.store = new NodeTypeStore();

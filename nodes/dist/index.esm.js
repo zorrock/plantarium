@@ -1104,6 +1104,9 @@ var colors = [
 var localStorageId = "plant.log.history";
 var hasLocalStorage = "localStorage" in globalThis;
 var history = hasLocalStorage ? localStorageId in localStorage ? JSON.parse(localStorage.getItem(localStorageId)) : [] : [];
+if (hasLocalStorage) {
+  level = parseInt(localStorage.getItem("pt-log-level")) || 2;
+}
 function saveHistory() {
   hasLocalStorage && localStorage.setItem(localStorageId, JSON.stringify(history));
 }
@@ -1120,7 +1123,7 @@ function log(scope) {
       store2.set(history);
     saveHistory();
     if ((!filters.length || filters.includes(scope)) && _level <= level) {
-      if (args instanceof Error || _level === 2) {
+      if (args instanceof Error) {
         console.error(`[${scope.padEnd(longestName, " ")}]`, args);
         return;
       }
@@ -1138,9 +1141,9 @@ function log(scope) {
       }
     }
   };
-  const log6 = (...args) => handleLog(args, 0);
+  const log6 = (...args) => handleLog(args, 2);
   log6.warn = (...args) => handleLog(args, 1);
-  log6.error = (err) => handleLog(err, 2);
+  log6.error = (err) => handleLog(err, 0);
   return log6;
 }
 log.getStore = function() {
@@ -1154,6 +1157,7 @@ log.setFilter = (...f) => {
 };
 log.setLevel = (l = 0) => {
   level = l;
+  localStorage.setItem("pt-log-level", "" + l);
 };
 var logger_default = log;
 

@@ -1,5 +1,5 @@
 import type { NodeTypeData } from '../types';
-import { NodeSystemData } from '../types';
+import type { NodeSystemData } from '../types';
 import Node from './Node';
 import type NodeSystem from './NodeSystem';
 import type NodeType from './NodeType';

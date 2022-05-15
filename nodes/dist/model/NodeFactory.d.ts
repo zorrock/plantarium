@@ -1,6 +1,6 @@
 import type NodeSystem from './NodeSystem';
 import type Node from './Node';
-import { NodeProps } from '../types';
+import type { NodeProps } from '../types';
 export default class NodeFactory {
     system: NodeSystem;
     id: {

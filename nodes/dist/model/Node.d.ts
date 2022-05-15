@@ -1,5 +1,5 @@
 import { EventEmitter } from '@plantarium/helpers';
-import { NodeAttributes, NodeProps } from '../types';
+import type { NodeAttributes, NodeProps } from '../types';
 import type NodeView from '../view/NodeView';
 import NodeConnection from './NodeConnection';
 import type NodeOutput from './NodeOutput';

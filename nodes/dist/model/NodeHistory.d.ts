@@ -1,4 +1,4 @@
-import { HistoryData, NodeProps } from '../types';
+import type { HistoryData, NodeProps } from '../types';
 import type NodeSystem from './NodeSystem';
 export default class NodeHistory {
     private system;

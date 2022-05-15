@@ -2393,26 +2393,26 @@ function create_fragment(ctx) {
       line1 = svg_element("line");
       attr(input, "type", "checkbox");
       attr(input, "id", ctx[1]);
-      attr(input, "class", "svelte-xm0fhp");
-      attr(title, "class", "svelte-xm0fhp");
+      attr(input, "class", "svelte-1pc79r8");
+      attr(title, "class", "svelte-1pc79r8");
       attr(line0, "vector-effect", "non-scaling-stroke");
       attr(line0, "x1", "0");
       attr(line0, "y1", "100");
       attr(line0, "x2", "100");
       attr(line0, "y2", "0");
-      attr(line0, "class", "svelte-xm0fhp");
+      attr(line0, "class", "svelte-1pc79r8");
       attr(line1, "vector-effect", "non-scaling-stroke");
       attr(line1, "x1", "0");
       attr(line1, "y1", "0");
       attr(line1, "x2", "100");
       attr(line1, "y2", "100");
-      attr(line1, "class", "svelte-xm0fhp");
+      attr(line1, "class", "svelte-1pc79r8");
       attr(svg, "xmlns", "http://www.w3.org/2000/svg");
       attr(svg, "viewBox", "0 0 100 100");
-      attr(svg, "class", "svelte-xm0fhp");
-      attr(label, "class", "checkbox-label svelte-xm0fhp");
+      attr(svg, "class", "svelte-1pc79r8");
+      attr(label, "class", "checkbox-label svelte-1pc79r8");
       attr(label, "for", ctx[1]);
-      attr(div, "class", "component-wrapper svelte-xm0fhp");
+      attr(div, "class", "component-wrapper svelte-1pc79r8");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -2523,7 +2523,7 @@ function create_each_block_1(ctx) {
       attr(circle, "cx", circle_cx_value = ctx[19].x * 100);
       attr(circle, "cy", circle_cy_value = ctx[19].y * 100);
       attr(circle, "r", "2");
-      attr(circle, "class", "svelte-qz1eft");
+      attr(circle, "class", "svelte-1aayydf");
       toggle_class(circle, "pinned", ctx[19].pinned);
     },
     m(target, anchor) {
@@ -2566,7 +2566,7 @@ function create_if_block(ctx) {
       attr(line, "y1", line_y__value = ctx[3][ctx[21] - 1].y * 100);
       attr(line, "x2", line_x__value_1 = ctx[19].x * 100);
       attr(line, "y2", line_y__value_1 = ctx[19].y * 100);
-      attr(line, "class", "svelte-qz1eft");
+      attr(line, "class", "svelte-1aayydf");
     },
     m(target, anchor) {
       insert(target, line, anchor);
@@ -2591,7 +2591,7 @@ function create_each_block(ctx) {
       attr(circle, "cx", circle_cx_value = ctx[19].x * 100);
       attr(circle, "cy", circle_cy_value = ctx[19].y * 100);
       attr(circle, "r", "1");
-      attr(circle, "class", "svelte-qz1eft");
+      attr(circle, "class", "svelte-1aayydf");
       toggle_class(circle, "pinned", ctx[19].pinned);
     },
     m(target, anchor) {
@@ -2643,14 +2643,14 @@ function create_fragment2(ctx) {
       attr(path_1, "d", ctx[2]);
       attr(path_1, "fill", "none");
       attr(path_1, "stroke", "grey");
-      attr(path_1, "class", "svelte-qz1eft");
+      attr(path_1, "class", "svelte-1aayydf");
       attr(g, "id", "debug");
-      attr(g, "class", "svelte-qz1eft");
+      attr(g, "class", "svelte-1aayydf");
       attr(svg, "viewBox", "0 0 100 100");
       attr(svg, "width", "100");
       attr(svg, "height", "100");
-      attr(svg, "class", "svelte-qz1eft");
-      attr(div, "class", "component-wrapper svelte-qz1eft");
+      attr(svg, "class", "svelte-1aayydf");
+      attr(div, "class", "component-wrapper svelte-1aayydf");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -2849,7 +2849,7 @@ function create_if_block2(ctx) {
   return {
     c() {
       span = element("span");
-      attr(span, "class", "overlay svelte-jold4n");
+      attr(span, "class", "overlay svelte-1greu0i");
       attr(span, "style", span_style_value = `width: ${(ctx[0] - ctx[1]) / (ctx[2] - ctx[1]) * 100}%`);
     },
     m(target, anchor) {
@@ -2891,15 +2891,15 @@ function create_fragment3(ctx) {
       t3 = space();
       button1 = element("button");
       button1.textContent = "+";
-      attr(button0, "class", "svelte-jold4n");
+      attr(button0, "class", "svelte-1greu0i");
       attr(input, "step", ctx[3]);
       attr(input, "max", ctx[2]);
       attr(input, "min", ctx[1]);
       attr(input, "type", "number");
       attr(input, "style", input_style_value = `width:${ctx[5]};`);
-      attr(input, "class", "svelte-jold4n");
-      attr(button1, "class", "svelte-jold4n");
-      attr(div, "class", "component-wrapper svelte-jold4n");
+      attr(input, "class", "svelte-1greu0i");
+      attr(button1, "class", "svelte-1greu0i");
+      attr(div, "class", "component-wrapper svelte-1greu0i");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -3122,15 +3122,15 @@ function create_fragment4(ctx) {
       span = element("span");
       t = space();
       input = element("input");
-      attr(span, "class", "overlay svelte-glh0u7");
+      attr(span, "class", "overlay svelte-2ybj14");
       attr(span, "style", span_style_value = `width: ${(ctx[0] - ctx[1]) / (ctx[2] - ctx[1]) * 100}%`);
       attr(input, "step", ctx[3]);
       attr(input, "max", ctx[2]);
       attr(input, "min", ctx[1]);
       attr(input, "type", "number");
       attr(input, "style", input_style_value = `width:${ctx[6]};`);
-      attr(input, "class", "svelte-glh0u7");
-      attr(div, "class", "component-wrapper svelte-glh0u7");
+      attr(input, "class", "svelte-2ybj14");
+      attr(div, "class", "component-wrapper svelte-2ybj14");
       toggle_class(div, "is-down", ctx[5]);
     },
     m(target, anchor) {
@@ -3347,7 +3347,7 @@ function create_each_block2(ctx) {
       t0 = text(t0_value);
       t1 = space();
       attr(p, "style", p_style_value = `opacity: ${ctx[7] === ctx[0] ? 0.5 : 1}`);
-      attr(p, "class", "item svelte-13r3c3f");
+      attr(p, "class", "item svelte-1htbma7");
       toggle_class(p, "selected", ctx[0] === ctx[7]);
     },
     m(target, anchor) {
@@ -3394,8 +3394,8 @@ function create_fragment5(ctx) {
         each_blocks[i].c();
       }
       attr(div0, "id", "main");
-      attr(div0, "class", "svelte-13r3c3f");
-      attr(div1, "class", "component-wrapper svelte-13r3c3f");
+      attr(div0, "class", "svelte-1htbma7");
+      attr(div1, "class", "component-wrapper svelte-1htbma7");
     },
     m(target, anchor) {
       insert(target, div1, anchor);
@@ -3510,7 +3510,7 @@ function create_else_block(ctx) {
       div = element("div");
       div.textContent = "none";
       attr(div, "id", "selected-value");
-      attr(div, "class", "svelte-o9z7b5");
+      attr(div, "class", "svelte-qqxsax");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -3538,7 +3538,7 @@ function create_if_block_1(ctx) {
       div = element("div");
       t = text(ctx[0]);
       attr(div, "id", "selected-value");
-      attr(div, "class", "svelte-o9z7b5");
+      attr(div, "class", "svelte-qqxsax");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -3577,7 +3577,7 @@ function create_if_block3(ctx) {
       t0 = text(t0_value);
       t1 = space();
       attr(p, "style", p_style_value = `opacity: ${ctx[11] === ctx[0] ? 0.5 : 1}`);
-      attr(p, "class", "item svelte-o9z7b5");
+      attr(p, "class", "item svelte-qqxsax");
     },
     m(target, anchor) {
       insert(target, p, anchor);
@@ -3668,10 +3668,10 @@ function create_fragment6(ctx) {
         each_blocks[i].c();
       }
       attr(div0, "id", "item-wrapper");
-      attr(div0, "class", "svelte-o9z7b5");
+      attr(div0, "class", "svelte-qqxsax");
       attr(div1, "id", "main");
-      attr(div1, "class", "svelte-o9z7b5");
-      attr(div2, "class", "component-wrapper svelte-o9z7b5");
+      attr(div1, "class", "svelte-qqxsax");
+      attr(div2, "class", "component-wrapper svelte-qqxsax");
       toggle_class(div2, "open", ctx[2]);
     },
     m(target, anchor) {
@@ -3839,7 +3839,7 @@ function create_each_block4(ctx) {
       attr(circle, "cx", circle_cx_value = ctx[19].x * 100);
       attr(circle, "cy", circle_cy_value = ctx[19].y * 200 - 50);
       attr(circle, "r", "4");
-      attr(circle, "class", "svelte-l4p352");
+      attr(circle, "class", "svelte-z71g0m");
       toggle_class(circle, "pinned", ctx[19].pinned);
     },
     m(target, anchor) {
@@ -3904,37 +3904,36 @@ function create_fragment7(ctx) {
       path1 = svg_element("path");
       attr(path0, "d", ctx[2]);
       attr(path0, "fill", "none");
-      attr(path0, "stroke", "#65E2A0");
-      attr(path0, "class", "svelte-l4p352");
+      attr(path0, "class", "left-path svelte-z71g0m");
       attr(svg0, "viewBox", "0 0 100 100");
       attr(svg0, "width", "50");
       attr(svg0, "height", "100");
-      attr(svg0, "class", "svelte-l4p352");
+      attr(svg0, "class", "svelte-z71g0m");
       attr(stop0, "offset", "0%");
       set_style(stop0, "stop-color", "#65E2A0");
       set_style(stop0, "stop-opacity", "1");
-      attr(stop0, "class", "svelte-l4p352");
+      attr(stop0, "class", "svelte-z71g0m");
       attr(stop1, "offset", "100%");
       set_style(stop1, "stop-color", "#469C6E");
       set_style(stop1, "stop-opacity", "1");
-      attr(stop1, "class", "svelte-l4p352");
+      attr(stop1, "class", "svelte-z71g0m");
       attr(linearGradient, "id", "grad1");
       attr(linearGradient, "x1", "0%");
       attr(linearGradient, "y1", "0%");
       attr(linearGradient, "x2", "100%");
       attr(linearGradient, "y2", "0%");
-      attr(linearGradient, "class", "svelte-l4p352");
-      attr(defs, "class", "svelte-l4p352");
+      attr(linearGradient, "class", "svelte-z71g0m");
+      attr(defs, "class", "svelte-z71g0m");
       attr(path1, "d", ctx[2]);
       attr(path1, "fill", "url(#grad1)");
       attr(path1, "stroke", "grey");
-      attr(path1, "class", "svelte-l4p352");
+      attr(path1, "class", "svelte-z71g0m");
       attr(svg1, "id", "right");
       attr(svg1, "viewBox", "0 0 100 100");
       attr(svg1, "width", "50");
       attr(svg1, "height", "100");
-      attr(svg1, "class", "svelte-l4p352");
-      attr(div, "class", "component-wrapper svelte-l4p352");
+      attr(svg1, "class", "svelte-z71g0m");
+      attr(div, "class", "component-wrapper svelte-z71g0m");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -4143,7 +4142,7 @@ function create_if_block4(ctx) {
       div = element("div");
       t0 = text(t0_value);
       t1 = space();
-      attr(div, "class", "search-entry svelte-usd9s7");
+      attr(div, "class", "search-entry svelte-17n1tqg");
       toggle_class(div, "focused", ctx[21].value === ctx[3]);
     },
     m(target, anchor) {
@@ -4232,8 +4231,8 @@ function create_fragment8(ctx) {
       }
       attr(input, "type", "text");
       attr(input, "placeholder", "Search");
-      attr(input, "class", "svelte-usd9s7");
-      attr(div, "class", "search-wrapper svelte-usd9s7");
+      attr(input, "class", "svelte-17n1tqg");
+      attr(div, "class", "search-wrapper svelte-17n1tqg");
     },
     m(target, anchor) {
       insert(target, div, anchor);

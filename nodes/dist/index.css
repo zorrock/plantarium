@@ -1275,10 +1275,11 @@ p.svelte-1aw08v2.svelte-1aw08v2.svelte-1aw08v2 {
     0px 2px 3px rgba(0, 0, 0, 0.13),
     1px 2px 2px rgba(0, 0, 0, 0.1),
     -1px -2px 2px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.4s ease;
+  transition: outline 0.4s ease;
+  outline: solid medium transparent;
 }
 .node-wrapper.is-updating {
-  background-color: #65e2a0;
+  outline: solid medium #65e2a0;
 }
 .node-wrapper > .node-title {
   color: var(--text-color, #f0f0f0);

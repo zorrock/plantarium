@@ -1,0 +1,87 @@
+{
+  ".svelte-kit/runtime/client/start.js": {
+    "file": "start-b1f91c30.js",
+    "src": ".svelte-kit/runtime/client/start.js",
+    "isEntry": true,
+    "imports": [
+      "_index-32017bd5.js",
+      "_index-3f981933.js",
+      "_singletons-d1fb5791.js"
+    ],
+    "dynamicImports": [
+      ".svelte-kit/runtime/components/layout.svelte",
+      ".svelte-kit/runtime/components/error.svelte",
+      "src/routes/index.svelte",
+      "src/routes/tutorial.svelte"
+    ]
+  },
+  ".svelte-kit/runtime/components/layout.svelte": {
+    "file": "layout.svelte-4e193043.js",
+    "src": ".svelte-kit/runtime/components/layout.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-32017bd5.js"
+    ]
+  },
+  ".svelte-kit/runtime/components/error.svelte": {
+    "file": "error.svelte-336865d6.js",
+    "src": ".svelte-kit/runtime/components/error.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-32017bd5.js"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "pages/index.svelte-d06dc220.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-32017bd5.js",
+      "_Header-3ca85f37.js",
+      "_singletons-d1fb5791.js",
+      "_index-3f981933.js"
+    ],
+    "css": [
+      "assets/pages/index.svelte-99a6e7a2.css"
+    ]
+  },
+  "src/routes/tutorial.svelte": {
+    "file": "pages/tutorial.svelte-56cb9fd9.js",
+    "src": "src/routes/tutorial.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-32017bd5.js",
+      "_Header-3ca85f37.js",
+      "_index-3f981933.js"
+    ],
+    "css": [
+      "assets/pages/index.svelte-99a6e7a2.css"
+    ]
+  },
+  "_index-32017bd5.js": {
+    "file": "chunks/index-32017bd5.js"
+  },
+  "_index-3f981933.js": {
+    "file": "chunks/index-3f981933.js",
+    "imports": [
+      "_index-32017bd5.js"
+    ]
+  },
+  "_singletons-d1fb5791.js": {
+    "file": "chunks/singletons-d1fb5791.js"
+  },
+  "_Header-3ca85f37.js": {
+    "file": "chunks/Header-3ca85f37.js",
+    "imports": [
+      "_index-32017bd5.js",
+      "_index-3f981933.js"
+    ],
+    "css": [
+      "assets/Header-55df4978.css"
+    ]
+  }
+}

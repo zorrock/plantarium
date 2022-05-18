@@ -1,11 +1,11 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-ed0626b7.js",
+    "file": "start-596ea937.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
-      "_index-b146c33d.js",
-      "_index-b524ff90.js"
+      "_index-d6cf603a.js",
+      "_singletons-934611aa.js"
     ],
     "dynamicImports": [
       ".svelte-kit/runtime/components/layout.svelte",
@@ -14,46 +14,46 @@
     ]
   },
   ".svelte-kit/runtime/components/layout.svelte": {
-    "file": "layout.svelte-5cd2f67c.js",
+    "file": "layout.svelte-ec2fa819.js",
     "src": ".svelte-kit/runtime/components/layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-b146c33d.js"
+      "_index-d6cf603a.js"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
-    "file": "error.svelte-3da525d7.js",
+    "file": "error.svelte-f44ccb47.js",
     "src": ".svelte-kit/runtime/components/error.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-b146c33d.js"
+      "_index-d6cf603a.js"
     ]
   },
   "src/routes/index.svelte": {
-    "file": "pages/index.svelte-56326fac.js",
+    "file": "pages/index.svelte-3f96005e.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-b146c33d.js",
-      "_index-b524ff90.js"
+      "_index-d6cf603a.js",
+      "_singletons-934611aa.js"
     ],
     "css": [
-      "assets/pages/index.svelte-fd3e2a40.css"
+      "assets/pages/index.svelte-940cc4e6.css"
     ],
     "assets": [
-      "assets/worker.ca2c1d7e.js"
+      "assets/worker.e6f33135.js"
     ]
   },
-  "_index-b146c33d.js": {
-    "file": "chunks/index-b146c33d.js"
+  "_index-d6cf603a.js": {
+    "file": "chunks/index-d6cf603a.js"
   },
-  "_index-b524ff90.js": {
-    "file": "chunks/index-b524ff90.js",
+  "_singletons-934611aa.js": {
+    "file": "chunks/singletons-934611aa.js",
     "imports": [
-      "_index-b146c33d.js"
+      "_index-d6cf603a.js"
     ]
   }
 }

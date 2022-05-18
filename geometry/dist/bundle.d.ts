@@ -26,11 +26,15 @@ declare module 'geometry/helpers' {
     export { default as noise } from 'geometry/helpers/noise';
     export { default as normalize2D } from 'geometry/helpers/normalize2D';
     export { default as normalize3D } from 'geometry/helpers/normalize3D';
+    export { default as instanceGeometry } from 'geometry/helpers/instanceGeometry';
     export { default as rotate2D } from 'geometry/helpers/rotate2D';
     export { default as rotate3D } from 'geometry/helpers/rotate3D';
     export { default as rotateMesh3D } from 'geometry/helpers/rotateMesh3D';
     export { default as transferToGeometry } from 'geometry/helpers/transferToGeometry';
     export { default as translateMesh } from 'geometry/helpers/translateMesh';
+    export { default as toOBJ } from 'geometry/helpers/toOBJ';
+    export { default as sanityCheckGeometry } from 'geometry/helpers/sanityCheckGeometry';
+    export { default as insertArray } from 'geometry/helpers/insertArray';
     export * from "geometry/helpers/findOrthVec";
 }
 
@@ -72,9 +76,10 @@ declare module 'geometry/helpers/curveToArray' {
 }
 
 declare module 'geometry/helpers/extrudePath' {
-    export default function (_path: [number, number, number, number][], resolution?: number): {
-        position: any[];
-        normals: any[];
+    export default function (path: Float32Array, resolution?: number): {
+        position: Float32Array;
+        normal: Float32Array;
+        uv: Float32Array;
         index: Uint16Array;
     };
 }
@@ -136,6 +141,15 @@ declare module 'geometry/helpers/normalize3D' {
     export default _default;
 }
 
+declare module 'geometry/helpers/instanceGeometry' {
+    import { InstancedGeometry, TransferGeometry } from "@plantarium/types";
+    export default function instanceGeometry(geo: TransferGeometry, { offset, scale, rotation }: {
+        offset?: number[] | Float32Array;
+        scale?: number[] | Float32Array;
+        rotation?: number[] | Float32Array;
+    }): InstancedGeometry;
+}
+
 declare module 'geometry/helpers/rotate2D' {
     const _default: (x: number, y: number, degrees: number) => number[];
     export default _default;
@@ -162,6 +176,20 @@ declare module 'geometry/helpers/translateMesh' {
     import type { TransferGeometry } from '@plantarium/types';
     import type { Vec3 } from 'ogl-typescript';
     export default function (mesh: TransferGeometry, offset: Vec3): TransferGeometry;
+}
+
+declare module 'geometry/helpers/toOBJ' {
+    import { TransferGeometry } from "@plantarium/types";
+    export default function (_geo: TransferGeometry[] | TransferGeometry): string;
+}
+
+declare module 'geometry/helpers/sanityCheckGeometry' {
+    import { TransferGeometry } from "@plantarium/types";
+    export default function (geometry: TransferGeometry, logAnyway?: boolean): void;
+}
+
+declare module 'geometry/helpers/insertArray' {
+    export default function insertArray(arr: Float32Array, startIndex: number, elems: number[]): void;
 }
 
 declare module 'geometry/helpers/findOrthVec' {

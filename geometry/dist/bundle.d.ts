@@ -33,6 +33,7 @@ declare module 'geometry/helpers' {
     export { default as transferToGeometry } from 'geometry/helpers/transferToGeometry';
     export { default as translateMesh } from 'geometry/helpers/translateMesh';
     export { default as toOBJ } from 'geometry/helpers/toOBJ';
+    export { default as parseOBJ } from 'geometry/helpers/parseOBJ';
     export { default as sanityCheckGeometry } from 'geometry/helpers/sanityCheckGeometry';
     export { default as insertArray } from 'geometry/helpers/insertArray';
     export * from "geometry/helpers/findOrthVec";
@@ -50,7 +51,6 @@ declare module 'geometry/shapes' {
     export { default as ring } from 'geometry/shapes/ring';
     export { default as triangle } from 'geometry/shapes/triangle';
     export { default as tube } from 'geometry/shapes/tube';
-    export { default as tube_old } from 'geometry/shapes/tube_old';
 }
 
 declare module 'geometry/modifiers' {
@@ -67,7 +67,7 @@ declare module 'geometry/helpers/calculateNormals' {
 
 declare module 'geometry/helpers/convertInstancedGeometry' {
     import type { InstancedGeometry, TransferGeometry } from "@plantarium/types";
-    export default function (instances: InstancedGeometry): TransferGeometry[];
+    export default function convertInstancedGeometry(instances: InstancedGeometry): TransferGeometry[];
 }
 
 declare module 'geometry/helpers/curveToArray' {
@@ -90,8 +90,7 @@ declare module 'geometry/helpers/flatten' {
 }
 
 declare module 'geometry/helpers/interpolateArray' {
-    function interpolateArray(array: number[], alpha?: number): number;
-    export default interpolateArray;
+    export default function interpolateArray(array: number[], alpha?: number): number;
 }
 
 declare module 'geometry/helpers/interpolateSkeleton' {
@@ -151,7 +150,7 @@ declare module 'geometry/helpers/instanceGeometry' {
 }
 
 declare module 'geometry/helpers/rotate2D' {
-    const _default: (x: number, y: number, degrees: number) => number[];
+    const _default: ([x, y]: [number, number] | number[], degrees: number) => number[];
     export default _default;
 }
 
@@ -181,6 +180,11 @@ declare module 'geometry/helpers/translateMesh' {
 declare module 'geometry/helpers/toOBJ' {
     import { TransferGeometry } from "@plantarium/types";
     export default function (_geo: TransferGeometry[] | TransferGeometry): string;
+}
+
+declare module 'geometry/helpers/parseOBJ' {
+    const _default: (text: string) => void;
+    export default _default;
 }
 
 declare module 'geometry/helpers/sanityCheckGeometry' {
@@ -249,15 +253,6 @@ declare module 'geometry/shapes/triangle' {
 declare module 'geometry/shapes/tube' {
     import type { TransferGeometry } from '@plantarium/types';
     export default function (skeleton: Float32Array, resX?: number): TransferGeometry;
-}
-
-declare module 'geometry/shapes/tube_old' {
-    export default function tube(skeleton: Float32Array, resX: number): {
-        position: Float32Array;
-        normal: Float32Array;
-        uv: Float32Array;
-        index: Uint16Array | Uint32Array;
-    };
 }
 
 declare module 'geometry/modifiers/noiseSkeleton' {

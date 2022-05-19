@@ -1,2 +1,2 @@
-declare const _default: (x: number, y: number, degrees: number) => number[];
+declare const _default: ([x, y]: [number, number] | number[], degrees: number) => number[];
 export default _default;

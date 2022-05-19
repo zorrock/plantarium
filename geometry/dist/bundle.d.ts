@@ -142,7 +142,10 @@ declare module 'geometry/helpers/normalize3D' {
 
 declare module 'geometry/helpers/instanceGeometry' {
     import { InstancedGeometry, TransferGeometry } from "@plantarium/types";
-    export default function instanceGeometry(geo: TransferGeometry, { offset, scale, rotation }: {
+    export default function instanceGeometry(geo: TransferGeometry, { offset, scale, rotation, id, baseAlpha, depth }: {
+        id?: string;
+        depth?: number;
+        baseAlpha?: Float32Array;
         offset?: number[] | Float32Array;
         scale?: number[] | Float32Array;
         rotation?: number[] | Float32Array;
@@ -193,7 +196,7 @@ declare module 'geometry/helpers/sanityCheckGeometry' {
 }
 
 declare module 'geometry/helpers/insertArray' {
-    export default function insertArray(arr: Float32Array, startIndex: number, elems: number[]): void;
+    export default function insertArray(arr: Float32Array, startIndex: number, elems: number[] | Float32Array): void;
 }
 
 declare module 'geometry/helpers/findOrthVec' {
